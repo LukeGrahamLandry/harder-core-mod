@@ -13,6 +13,5 @@ public class ExhaustionEffect extends Effect {
         super(EffectType.HARMFUL, 0xFFFFFF);
         this.addAttributesModifier(Attributes.MOVEMENT_SPEED, UUID.randomUUID().toString(), -0.05F, AttributeModifier.Operation.MULTIPLY_TOTAL);
         this.addAttributesModifier(Attributes.ATTACK_SPEED, UUID.randomUUID().toString(), -0.05F, AttributeModifier.Operation.MULTIPLY_TOTAL);
-
     }
 }

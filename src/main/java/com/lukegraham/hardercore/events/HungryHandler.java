@@ -30,7 +30,7 @@ public class HungryHandler {
     }
 
     @SubscribeEvent
-    public static void removeHungryOnEAt(LivingEntityUseItemEvent.Finish event){
+    public static void removeHungryOnEat(LivingEntityUseItemEvent.Finish event){
         if (event.getItem().isFood() && event.getEntityLiving() instanceof PlayerEntity){
             applyHungry((PlayerEntity) event.getEntityLiving());
         }
@@ -40,8 +40,8 @@ public class HungryHandler {
         if (player.getEntityWorld().isRemote()) return;
 
         int level = calculateHungryLevel(player);
-        HarderCore.LOGGER.debug(level);
         if (level >= 0){
+            player.removePotionEffect(EffectInit.HUNGRY.get());  // remove first in case it went down since last time
             player.addPotionEffect(new EffectInstance(EffectInit.HUNGRY.get(), Integer.MAX_VALUE, level, true, false));
         } else if (player.getActivePotionEffect(EffectInit.HUNGRY.get()) != null){
             player.removePotionEffect(EffectInit.HUNGRY.get());

@@ -48,7 +48,7 @@ public class HelpBook extends WritableBookItem {
     private ListNBT getPages(){
         ListNBT pages = new ListNBT();
 
-        addPage("This mod makes some changes to make the world less forgiving. Being hungry causes slowness and weakness. Not sleeping causes slowness, reduced attack speed and eventually some nausea.", pages);
+        addPage("This mod makes some changes to make the world less forgiving. Being hungry causes slowness and weakness. Not sleeping causes slowness, reduced attack speed and eventually some nausea. Eating raw meat gives nausea and either poison or hunger.", pages);
         addPage("Being in darkness quickly spawns killer shadows which disappear in light. They drop scales which can craft a charm that stops their spawning while in your inventory or a questionable stew.", pages);
         addPage("", pages);
         addPage("", pages);
