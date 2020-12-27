@@ -1,12 +1,17 @@
 package com.lukegraham.hardercore;
 
+import com.lukegraham.hardercore.capability.temp.ITemp;
+import com.lukegraham.hardercore.capability.temp.Temp;
+import com.lukegraham.hardercore.capability.temp.TempStorage;
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.init.BlockInit;
 import com.lukegraham.hardercore.init.EffectInit;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.init.ItemInit;
+import com.lukegraham.hardercore.util.PacketHandler;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -47,6 +52,10 @@ public class HarderCore
             GlobalEntityTypeAttributes.put(EntityInit.SHADOW_KILLER.get(), ShadowKillerEntity.setCustomAttributes().create());
 
         });
+
+        CapabilityManager.INSTANCE.register(ITemp.class, new TempStorage(), Temp::new);
+        PacketHandler.registerMessages(MOD_ID);
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {}

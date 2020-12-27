@@ -30,15 +30,13 @@ public class ShadowKillerSpawnHandler {
         if (rand.nextInt(250) == 0){
             PlayerEntity player = event.player;
             World world = player.getEntityWorld();
-            if (world.isRemote() || hasAntiCharm(player)) return;
+            if (world.isRemote()) return;
             BlockPos pos = player.getPosition();
 
             int light = world.getLight(pos);
-            if (light < 4){
+            if (light < 4 && !hasAntiCharm(player)){
                 ShadowKillerEntity.summon(player);
             }
-
-            // int timeSinceSleep = ((ServerPlayerEntity)player).getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST))
         }
     }
 

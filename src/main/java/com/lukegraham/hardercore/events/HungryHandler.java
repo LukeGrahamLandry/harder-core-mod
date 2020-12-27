@@ -33,6 +33,7 @@ public class HungryHandler {
     public static void removeHungryOnEat(LivingEntityUseItemEvent.Finish event){
         if (event.getItem().isFood() && event.getEntityLiving() instanceof PlayerEntity){
             applyHungry((PlayerEntity) event.getEntityLiving());
+
         }
     }
 

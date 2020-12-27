@@ -23,12 +23,6 @@ public class ItemInit {
             "Gives lots of hunger, night vision and brief poison"));
     public static final RegistryObject<Item> HELP_BOOK = ITEMS.register("help_book", () -> new HelpBook(new Item.Properties().group(ModItemGroup.instance)));
 
-
-
-    private static RegistryObject<Item> createBasicItem(String name){
-        return ITEMS.register(name, () -> new Item(new Item.Properties().group(ModItemGroup.instance)));
-    }
-
     private static RegistryObject<Item> createDescriptionItem(String name, String description){
         return ITEMS.register(name, () -> new DescribableItem(new Item.Properties().group(ModItemGroup.instance), description));
     }
