@@ -4,6 +4,10 @@
     "item.hardercore.shadow_scale": "Shadow Scale",
     "item.hardercore.anti_shadow_charm": "Charm of the Sun",
     "item.hardercore.shadow_food": "Shadowy Soup",
+    "item.hardercore.help_book": "Harder Core Help",
+
+    "effect.hardercore.hungry": "Hungry",
+    "effect.hardercore.exhaustion": "Exhaustion",
 
     "entity.hardercore.shadow_killer": "Killer Shadow"
 }

@@ -2,6 +2,7 @@ package com.lukegraham.hardercore;
 
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.init.BlockInit;
+import com.lukegraham.hardercore.init.EffectInit;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.init.ItemInit;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
@@ -35,6 +36,7 @@ public class HarderCore
         ItemInit.ITEMS.register(modEventBus);    // registers your items
         BlockInit.BLOCKS.register(modEventBus);  // registers your blocks
         EntityInit.ENTITY_TYPES.register(modEventBus);
+        EffectInit.EFFECTS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

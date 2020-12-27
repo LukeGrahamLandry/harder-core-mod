@@ -5,10 +5,14 @@ import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.init.ItemInit;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.stats.ServerStatisticsManager;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,6 +37,8 @@ public class ShadowKillerSpawnHandler {
             if (light < 4){
                 ShadowKillerEntity.summon(player);
             }
+
+            // int timeSinceSleep = ((ServerPlayerEntity)player).getStats().getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST))
         }
     }
 

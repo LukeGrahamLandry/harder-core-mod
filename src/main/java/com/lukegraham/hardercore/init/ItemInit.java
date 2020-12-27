@@ -3,6 +3,7 @@ package com.lukegraham.hardercore.init;
 
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.items.DescribableItem;
+import com.lukegraham.hardercore.items.HelpBook;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -20,6 +21,8 @@ public class ItemInit {
                     .effect(() -> new EffectInstance(Effects.POISON, 15*20), 1F)
                     .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 16*60*20), 1F).build()),
             "Gives lots of hunger, night vision and brief poison"));
+    public static final RegistryObject<Item> HELP_BOOK = ITEMS.register("help_book", () -> new HelpBook(new Item.Properties().group(ModItemGroup.instance)));
+
 
 
     private static RegistryObject<Item> createBasicItem(String name){
