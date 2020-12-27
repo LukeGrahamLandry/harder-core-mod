@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " s ",
+    "sls",
+    " s "
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:lantern"
+    },
+    "l": {
+      "item":"hardercore:shadow_scale"
+    }
+  },
+  "result": {
+    "item": "hardercore:anti_shadow_charm"
+  }
+}
