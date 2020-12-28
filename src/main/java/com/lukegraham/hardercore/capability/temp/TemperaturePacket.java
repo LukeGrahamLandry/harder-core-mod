@@ -9,31 +9,37 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+// might have to split temp and quality packets to avoid a race condition
 public class TemperaturePacket {
     private UUID entityID;
-    private int factor;
+    private int temp;
+    private int quality;
 
-    public TemperaturePacket(UUID id, int factor) {
+    public TemperaturePacket(UUID id, int t, int q) {
         this.entityID = id;
-        this.factor = factor;
+        this.temp = t;
+        this.quality = q;
     }
 
     public static TemperaturePacket decode(PacketBuffer buf) {
-        TemperaturePacket packet = new TemperaturePacket(buf.readUniqueId(), buf.readInt());
+        TemperaturePacket packet = new TemperaturePacket(buf.readUniqueId(), buf.readInt(), buf.readInt());
         return packet;
     }
 
     public static void encode(TemperaturePacket packet, PacketBuffer buf) {
         buf.writeUniqueId(packet.entityID);
-        buf.writeInt(packet.factor);
+        buf.writeInt(packet.temp);
+        buf.writeInt(packet.quality);
     }
 
     public static void handle(TemperaturePacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             ClientWorld world = Minecraft.getInstance().world;
             PlayerEntity player = world.getPlayerByUuid(packet.entityID);
-            if (player != null)
-                TempCapability.setTemp(player, packet.factor);
+            if (player != null) {
+                TempCapability.setTemp(player, packet.temp);
+                TempCapability.setAirQuality(player, packet.quality);
+            }
         });
 
         ctx.get().setPacketHandled(true);

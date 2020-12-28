@@ -10,7 +10,7 @@
     "effect.hardercore.exhaustion": "Exhaustion",
     "effect.hardercore.hypothermia": "Hypothermia",
     "effect.hardercore.heat_stroke": "Heat Stroke",
-
+    "effect.hardercore.bad_air": "Smokey Lungs",
 
     "entity.hardercore.shadow_killer": "Killer Shadow"
 }

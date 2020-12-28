@@ -5,8 +5,10 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public class Temp implements ITemp {
     int temp;
+    int quality;
     public Temp() {
         this.temp = 0;
+        this.quality = 0;
     }
 
     @Override
@@ -29,14 +31,35 @@ public class Temp implements ITemp {
     }
 
     @Override
+    public int getAirQuality() {
+        return quality;
+    }
+
+    @Override
+    public void addAirQuality(int amount) {
+        quality += amount;
+        quality = Math.max(quality, 0);
+        quality = Math.min(quality, 100);
+    }
+
+    @Override
+    public void setAirQuality(int amount) {
+        quality = amount;
+        quality = Math.max(quality, 0);
+        quality = Math.min(quality, 100);
+    }
+
+    @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("temp", temp);
+        nbt.putInt("quality", quality);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
         setTemp(nbt.getInt("temp"));
+        setAirQuality(nbt.getInt("quality"));
     }
 }

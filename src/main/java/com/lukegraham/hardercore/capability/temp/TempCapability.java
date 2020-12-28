@@ -22,7 +22,7 @@ public class TempCapability {
     public static void addTemp(final PlayerEntity player, int amount){
         getPlayerTempCap(player).ifPresent(cap -> cap.addTemp(amount));
         if (!player.getEntityWorld().isRemote())
-        PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player)));
+        PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player), TempCapability.getAirQuality(player)));
     }
 
     public static int getTemp(final PlayerEntity player) {
@@ -32,6 +32,22 @@ public class TempCapability {
     public static void setTemp(final PlayerEntity player, final int amount){
         getPlayerTempCap(player).ifPresent(cap -> cap.setTemp(amount));
         if (!player.getEntityWorld().isRemote())
-        PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player)));
+            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player), TempCapability.getAirQuality(player)));
+    }
+
+    public static void addAirQuality(final PlayerEntity player, int amount){
+        getPlayerTempCap(player).ifPresent(cap -> cap.addAirQuality(amount));
+        if (!player.getEntityWorld().isRemote())
+            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player), TempCapability.getAirQuality(player)));
+    }
+
+    public static int getAirQuality(final PlayerEntity player) {
+        if (player != null && player.isAlive()) return getPlayerTempCap(player).map(ITemp::getAirQuality).orElse(0);
+        return 0;
+    }
+    public static void setAirQuality(final PlayerEntity player, final int amount){
+        getPlayerTempCap(player).ifPresent(cap -> cap.setAirQuality(amount));
+        if (!player.getEntityWorld().isRemote())
+            PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), new TemperaturePacket(player.getUniqueID(), TempCapability.getTemp(player), TempCapability.getAirQuality(player)));
     }
 }

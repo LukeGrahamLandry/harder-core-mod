@@ -7,4 +7,8 @@ public interface ITemp extends INBTSerializable<CompoundNBT> {
     int getTemp();
     void addTemp(int amount);
     void setTemp(int amount);
+
+    int getAirQuality();
+    void addAirQuality(int amount);
+    void setAirQuality(int amount);
 }

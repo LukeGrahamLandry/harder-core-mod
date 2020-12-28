@@ -14,3 +14,6 @@ A minecraft mod for forge 1.16.3 that makes the game harder
 - Temperature (displayed in top left)
     - depends on biome, armor and being in water or on fire
     - extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage
+- Air Quality (displayed in top left)
+    - reduced by smelting and placed torches, raised by time spent outside
+    - too low quality causes nausea, hunger and damage

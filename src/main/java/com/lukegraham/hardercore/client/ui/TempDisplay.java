@@ -18,7 +18,13 @@ public class TempDisplay {
         int temp = TempCapability.getTemp(player);
         int color = getTempColour(temp);
 
+        if (Math.abs(temp) > 15)
         Minecraft.getInstance().fontRenderer.drawString(matrices,Integer.toString(temp), 5, 5, color);
+
+        int quality = TempCapability.getAirQuality(player);
+        color = getQualityColour(quality);
+        if (quality > 5)
+            Minecraft.getInstance().fontRenderer.drawString(matrices, (100 - quality) + "%", 5, 15, color);
     }
 
     private static int getTempColour(int temp){
@@ -36,6 +42,18 @@ public class TempDisplay {
             red -= shift;
             green -= shift;
         }
+
+        int rgb = red;
+        rgb = (rgb << 8) + green;
+        rgb = (rgb << 8) + blue;
+
+        return rgb;
+    }
+
+    private static int getQualityColour(int quality){
+        int green = (int) Math.floor(quality * 2.4D);
+        int red = (int) Math.floor(quality * 2.4D);
+        int blue = (int) Math.floor(quality * 2.4D);
 
         int rgb = red;
         rgb = (rgb << 8) + green;

@@ -29,7 +29,7 @@ public class TempuratureHandler {
 
     @SubscribeEvent
     public static void applyBiomeTemp(TickEvent.PlayerTickEvent event){
-        if (rand.nextInt(1000) == 0 && !event.player.getEntityWorld().isRemote()) {
+        if (!event.player.getEntityWorld().isRemote() &&  rand.nextInt(1000) == 0) {
             PlayerEntity player = event.player;
 
             int temp = updateCurrentTemp(player);
