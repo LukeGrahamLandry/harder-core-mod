@@ -14,22 +14,22 @@ import net.minecraft.util.DamageSource;
 import java.util.Random;
 import java.util.UUID;
 
-public class BadAirEffect extends Effect {
+public class ThirstEffect extends Effect {
     Random rand = new Random();
-    public BadAirEffect() {
+    public ThirstEffect() {
         super(EffectType.HARMFUL, 0xFFFFFF);
     }
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        return rand.nextInt(200) == 0;
+        return rand.nextInt(60) == 0;
     }
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        entity.attackEntityFrom(DamageSource.DROWN, amplifier);
+        if (amplifier > 1 && entity.getHealth() > 5.0F) entity.attackEntityFrom(DamageSource.STARVE, amplifier);
 
-        if (rand.nextInt(2) == 0 && amplifier > 1)
-        entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 50 + rand.nextInt(20 + 100 * amplifier), 1, true, false));
+        if (rand.nextInt(amplifier > 2 ? 3 : 10) == 0)
+        entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100 + rand.nextInt(20 + 100 * amplifier), amplifier, true, false));
     }
 }

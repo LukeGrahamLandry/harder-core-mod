@@ -24,7 +24,7 @@ public class HungryHandler {
 
     @SubscribeEvent
     public static void checkAndApplyHungryRandomly(TickEvent.PlayerTickEvent event){
-        if (rand.nextInt(1000) == 0){  // TODO: lower the number after testing
+        if (rand.nextInt(200) == 0){  // TODO: lower the number after testing
             applyHungry(event.player);
         }
     }
@@ -40,11 +40,9 @@ public class HungryHandler {
         if (player.getEntityWorld().isRemote()) return;
 
         int level = calculateHungryLevel(player);
+        player.removePotionEffect(EffectInit.HUNGRY.get());
         if (level >= 0){
-            player.removePotionEffect(EffectInit.HUNGRY.get());  // remove first in case it went down since last time
             player.addPotionEffect(new EffectInstance(EffectInit.HUNGRY.get(), Integer.MAX_VALUE, level, true, false));
-        } else if (player.getActivePotionEffect(EffectInit.HUNGRY.get()) != null){
-            player.removePotionEffect(EffectInit.HUNGRY.get());
         }
     }
 

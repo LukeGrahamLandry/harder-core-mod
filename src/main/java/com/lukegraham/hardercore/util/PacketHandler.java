@@ -2,7 +2,7 @@ package com.lukegraham.hardercore.util;
 
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.capability.temp.TemperaturePacket;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -14,9 +14,9 @@ public class PacketHandler {
         int i = -1;
         INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(HarderCore.MOD_ID, channelName), () -> "1.0", s -> true, s -> true);
 
-        INSTANCE.registerMessage(++i, TemperaturePacket.class,
-                TemperaturePacket::encode,
-                TemperaturePacket::decode,
-                TemperaturePacket::handle);
+        INSTANCE.registerMessage(++i, HarshEnvironmentPacket.class,
+                HarshEnvironmentPacket::encode,
+                HarshEnvironmentPacket::decode,
+                HarshEnvironmentPacket::handle);
     }
 }

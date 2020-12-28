@@ -6,11 +6,12 @@
     "item.hardercore.shadow_food": "Shadowy Soup",
     "item.hardercore.help_book": "Harder Core Help",
 
-    "effect.hardercore.hungry": "Hungry",
+    "effect.hardercore.hungry": "Starving",
     "effect.hardercore.exhaustion": "Exhaustion",
     "effect.hardercore.hypothermia": "Hypothermia",
     "effect.hardercore.heat_stroke": "Heat Stroke",
     "effect.hardercore.bad_air": "Smokey Lungs",
+    "effect.hardercore.thirst": "Dehydration",
 
     "entity.hardercore.shadow_killer": "Killer Shadow"
 }

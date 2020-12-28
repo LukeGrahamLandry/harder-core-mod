@@ -1,27 +1,24 @@
-package com.lukegraham.hardercore.capability.temp;
+package com.lukegraham.hardercore.capability.harsh_environment;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-public class TempCapProvider implements ICapabilitySerializable<CompoundNBT>
+public class HarshEnvironmentCapProvider implements ICapabilitySerializable<CompoundNBT>
 {
-    private final Temp temp;
+    private final HarshEnvironment temp;
 
-    public TempCapProvider()
+    public HarshEnvironmentCapProvider()
     {
-        temp = new Temp();
+        temp = new HarshEnvironment();
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
     {
-        return cap == TempCapability.TEMP_CAPABILITY ? LazyOptional.of(() -> temp).cast() : LazyOptional.empty();
+        return cap == HarshEnvironmentCapability.TEMP_CAPABILITY ? LazyOptional.of(() -> temp).cast() : LazyOptional.empty();
     }
 
     @Override

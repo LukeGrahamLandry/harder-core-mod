@@ -1,10 +1,7 @@
 package com.lukegraham.hardercore.init;
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.effects.BadAirEffect;
-import com.lukegraham.hardercore.effects.ExhaustionEffect;
-import com.lukegraham.hardercore.effects.HeatStrokeEffect;
-import com.lukegraham.hardercore.effects.HypothermiaEffect;
+import com.lukegraham.hardercore.effects.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
@@ -19,5 +16,5 @@ public class EffectInit {
     public static final RegistryObject<Effect> HEAT_STROKE = EFFECTS.register("heat_stroke", HeatStrokeEffect::new);
     public static final RegistryObject<Effect> HYPOTHERMIA = EFFECTS.register("hypothermia", HypothermiaEffect::new);
     public static final RegistryObject<Effect> BAD_AIR = EFFECTS.register("bad_air", BadAirEffect::new);
-
+    public static final RegistryObject<Effect> THIRST = EFFECTS.register("thirst", ThirstEffect::new);
 }

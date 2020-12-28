@@ -1,17 +1,23 @@
 package com.lukegraham.hardercore;
 
-import com.lukegraham.hardercore.capability.temp.ITemp;
-import com.lukegraham.hardercore.capability.temp.Temp;
-import com.lukegraham.hardercore.capability.temp.TempStorage;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapProvider;
+import com.lukegraham.hardercore.capability.harsh_environment.IHarshEnvironment;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironment;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentStorage;
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.init.BlockInit;
 import com.lukegraham.hardercore.init.EffectInit;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.init.ItemInit;
 import com.lukegraham.hardercore.util.PacketHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -53,9 +59,8 @@ public class HarderCore
 
         });
 
-        CapabilityManager.INSTANCE.register(ITemp.class, new TempStorage(), Temp::new);
+        CapabilityManager.INSTANCE.register(IHarshEnvironment.class, new HarshEnvironmentStorage(), HarshEnvironment::new);
         PacketHandler.registerMessages(MOD_ID);
-
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {}

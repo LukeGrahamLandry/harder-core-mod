@@ -1,12 +1,11 @@
 package com.lukegraham.hardercore.events;
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.capability.temp.TempCapProvider;
-import com.lukegraham.hardercore.capability.temp.TempCapability;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapProvider;
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
 import com.lukegraham.hardercore.init.EffectInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -54,7 +53,7 @@ public class TempuratureHandler {
     }
 
     private static int updateCurrentTemp(PlayerEntity player){
-        int oldTemp = TempCapability.getTemp(player);
+        int oldTemp = HarshEnvironmentCapability.getTemp(player);
         int tempShift = getBiomeTempShift(player);
 
         if (player.isInWater()){
@@ -67,7 +66,7 @@ public class TempuratureHandler {
         if (player.getPosY() > 100) tempShift -= 5;
         if (player.getPosY() < 10) tempShift += 5;
 
-        TempCapability.addTemp(player, tempShift);
+        HarshEnvironmentCapability.addTemp(player, tempShift);
         return oldTemp + tempShift;
     }
 
@@ -85,7 +84,7 @@ public class TempuratureHandler {
         return clothesBonus;
     }
 
-    private static int getBiomeTempShift(PlayerEntity player){
+    public static int getBiomeTempShift(PlayerEntity player){
         Biome biome = player.getEntityWorld().getBiome(player.getPosition());
         if (biome.getCategory() == Biome.Category.NETHER){
             return 10;
@@ -113,10 +112,10 @@ public class TempuratureHandler {
     }
 
     @SubscribeEvent
-    public static void attachCap(AttachCapabilitiesEvent<Entity> event){
+    public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event){
         if (event.getObject() instanceof PlayerEntity){
-            ICapabilityProvider cap = new TempCapProvider();
-            event.addCapability(new ResourceLocation(HarderCore.MOD_ID, "tempurature"), cap);
+            ICapabilityProvider cap = new HarshEnvironmentCapProvider();
+            event.addCapability(new ResourceLocation(HarderCore.MOD_ID, "temp"), cap);
         }
     }
 }

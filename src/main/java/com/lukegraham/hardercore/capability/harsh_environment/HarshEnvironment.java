@@ -1,14 +1,15 @@
-package com.lukegraham.hardercore.capability.temp;
+package com.lukegraham.hardercore.capability.harsh_environment;
 
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraftforge.common.util.INBTSerializable;
 
-public class Temp implements ITemp {
+public class HarshEnvironment implements IHarshEnvironment {
     int temp;
     int quality;
-    public Temp() {
+    int thirst;
+    public HarshEnvironment() {
         this.temp = 0;
         this.quality = 0;
+        this.thirst = 0;
     }
 
     @Override
@@ -50,10 +51,30 @@ public class Temp implements ITemp {
     }
 
     @Override
+    public int getThirst() {
+        return thirst;
+    }
+
+    @Override
+    public void addThirst(int amount) {
+        thirst += amount;
+        thirst = Math.max(thirst, 0);
+        thirst = Math.min(thirst, 100);
+    }
+
+    @Override
+    public void setThirst(int amount) {
+        thirst = amount;
+        thirst = Math.max(thirst, 0);
+        thirst = Math.min(thirst, 100);
+    }
+
+    @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("temp", temp);
         nbt.putInt("quality", quality);
+        nbt.putInt("thirst", thirst);
         return nbt;
     }
 
@@ -61,5 +82,6 @@ public class Temp implements ITemp {
     public void deserializeNBT(CompoundNBT nbt) {
         setTemp(nbt.getInt("temp"));
         setAirQuality(nbt.getInt("quality"));
+        setThirst(nbt.getInt("thirst"));
     }
 }
