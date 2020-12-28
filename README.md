@@ -11,3 +11,6 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - Being hungry causes slowness and weakness
     - Not sleeping causes slowness, reduced attack speed and eventually some nausea
     - Eating raw meat gives nausea and either poison or hunger
+- Temperature (displayed in top left)
+    - depends on biome, armor and being in water or on fire
+    - extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage

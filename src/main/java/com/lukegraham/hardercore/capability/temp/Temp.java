@@ -17,11 +17,15 @@ public class Temp implements ITemp {
     @Override
     public void addTemp(int amount) {
         temp += amount;
+        temp = Math.max(temp, -255);
+        temp = Math.min(temp, 255);
     }
 
     @Override
     public void setTemp(int amount) {
         temp = amount;
+        temp = Math.max(temp, -255);
+        temp = Math.min(temp, 255);
     }
 
     @Override

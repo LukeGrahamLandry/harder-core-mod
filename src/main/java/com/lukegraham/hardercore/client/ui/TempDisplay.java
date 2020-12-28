@@ -15,11 +15,33 @@ import net.minecraftforge.fml.common.Mod;
 public class TempDisplay {
     public static void buildOverlay(MatrixStack matrices) {
         PlayerEntity player = Minecraft.getInstance().player;
-        int coins = TempCapability.getTemp(player);
+        int temp = TempCapability.getTemp(player);
+        int color = getTempColour(temp);
 
+        Minecraft.getInstance().fontRenderer.drawString(matrices,Integer.toString(temp), 5, 5, color);
+    }
 
-        Minecraft.getInstance().fontRenderer.drawString(matrices,Integer.toString(coins), 29, 10 + 4, 16767796);
+    private static int getTempColour(int temp){
+        int green = 255;
+        int red = 255;
+        int blue = 255;
 
+        if (temp > 0){
+            int shift = Math.min(255, temp);
+            blue -= shift;
+            green -= shift;
+        }
+        if (temp < 0){
+            int shift = Math.min(255, temp*-1);
+            red -= shift;
+            green -= shift;
+        }
+
+        int rgb = red;
+        rgb = (rgb << 8) + green;
+        rgb = (rgb << 8) + blue;
+
+        return rgb;
     }
 
     @SubscribeEvent

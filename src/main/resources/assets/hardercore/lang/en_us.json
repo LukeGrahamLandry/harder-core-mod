@@ -8,6 +8,9 @@
 
     "effect.hardercore.hungry": "Hungry",
     "effect.hardercore.exhaustion": "Exhaustion",
+    "effect.hardercore.hypothermia": "Hypothermia",
+    "effect.hardercore.heat_stroke": "Heat Stroke",
+
 
     "entity.hardercore.shadow_killer": "Killer Shadow"
 }
