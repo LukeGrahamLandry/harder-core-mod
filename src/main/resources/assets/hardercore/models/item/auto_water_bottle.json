@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "hardercore:items/anti_shadow_charm"
+    "layer0": "hardercore:items/water_bottle"
   }
 }

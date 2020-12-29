@@ -5,6 +5,8 @@
     "item.hardercore.anti_shadow_charm": "Charm of the Sun",
     "item.hardercore.shadow_food": "Shadowy Soup",
     "item.hardercore.help_book": "Harder Core Help",
+    "item.hardercore.water_bottle": "Hydro Flask",
+    "item.hardercore.auto_water_bottle": "Automatic Hydro Flask",
 
     "effect.hardercore.hungry": "Starving",
     "effect.hardercore.exhaustion": "Exhaustion",

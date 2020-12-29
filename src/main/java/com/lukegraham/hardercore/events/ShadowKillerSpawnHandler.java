@@ -14,6 +14,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,7 +36,8 @@ public class ShadowKillerSpawnHandler {
 
             int light = world.getLight(pos);
             if (light < 4 && !hasAntiCharm(player)){
-                ShadowKillerEntity.summon(player);
+                boolean isNether = event.player.getEntityWorld().getBiome(event.player.getPosition()).getCategory() == Biome.Category.NETHER;
+                if (!isNether) ShadowKillerEntity.summon(player);
             }
         }
     }

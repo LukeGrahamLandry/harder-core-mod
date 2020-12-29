@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "hardercore:water_bottle"
+    }
+  ],
+  "result": {
+    "item": "hardercore:auto_water_bottle"
+  }
+}

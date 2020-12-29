@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "g g",
+    "g g",
+    "gbg"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "g": {
+      "item":"minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "hardercore:water_bottle"
+  }
+}

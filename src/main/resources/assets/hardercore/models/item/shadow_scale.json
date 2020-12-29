@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "firstmod:items/shadow_scale"
+    "layer0": "hardercore:items/shadow_scale"
   }
 }
