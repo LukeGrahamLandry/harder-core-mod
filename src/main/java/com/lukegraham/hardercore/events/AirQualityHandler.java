@@ -65,7 +65,6 @@ public class AirQualityHandler {
         int quality = HarshEnvironmentCapability.getAirQuality(player);
         player.removePotionEffect(EffectInit.BAD_AIR.get());
         int level = calculateEffectLevel(quality);
-        HarderCore.LOGGER.debug(quality + "% -> " + level);
         if (level == -1) return;
         player.addPotionEffect(new EffectInstance(EffectInit.BAD_AIR.get(), Integer.MAX_VALUE, level, true, false));
     }

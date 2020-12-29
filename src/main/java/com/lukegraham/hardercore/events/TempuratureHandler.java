@@ -40,7 +40,6 @@ public class TempuratureHandler {
         player.removePotionEffect(EffectInit.HEAT_STROKE.get());
         player.removePotionEffect(EffectInit.HYPOTHERMIA.get());
         int level = calculateEffectLevel(temp);
-        HarderCore.LOGGER.debug(temp + " -> " + level);
         if (level == -1) return;
         Effect effect = temp > 0 ? EffectInit.HEAT_STROKE.get() : EffectInit.HYPOTHERMIA.get();
         player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, true, false));
@@ -54,7 +53,15 @@ public class TempuratureHandler {
 
     private static int updateCurrentTemp(PlayerEntity player){
         int oldTemp = HarshEnvironmentCapability.getTemp(player);
+        int tempShift = calculateTotalTempShift(player);
+
+        HarshEnvironmentCapability.addTemp(player, tempShift);
+        return oldTemp + tempShift;
+    }
+
+    public static int calculateTotalTempShift(PlayerEntity player){
         int tempShift = getBiomeTempShift(player);
+        int oldTemp = HarshEnvironmentCapability.getTemp(player);
 
         if (player.isInWater()){
             if (oldTemp > 0) tempShift -= 10;
@@ -62,12 +69,11 @@ public class TempuratureHandler {
         } else if (tempShift < 0) {
             tempShift += calculateArmorWarmth(player);
         }
-        if (player.getFireTimer() > 0) tempShift += 20;
+        if (player.getFireTimer() > 0) tempShift += 25;
         if (player.getPosY() > 100) tempShift -= 5;
         if (player.getPosY() < 10) tempShift += 5;
 
-        HarshEnvironmentCapability.addTemp(player, tempShift);
-        return oldTemp + tempShift;
+        return tempShift;
     }
 
     private static int calculateArmorWarmth(PlayerEntity player){
@@ -86,11 +92,13 @@ public class TempuratureHandler {
 
     public static int getBiomeTempShift(PlayerEntity player){
         Biome biome = player.getEntityWorld().getBiome(player.getPosition());
+
         if (biome.getCategory() == Biome.Category.NETHER){
             return 10;
         }
         if (biome.getCategory() == Biome.Category.DESERT || biome.getCategory() == Biome.Category.MESA){
-            return 5;
+            if (player.getEntityWorld().isNightTime()) return -2;
+            else return 5;
         }
         if (biome.getCategory() == Biome.Category.JUNGLE || biome.getCategory() == Biome.Category.SAVANNA){
             return 2;

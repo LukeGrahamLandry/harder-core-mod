@@ -63,8 +63,7 @@ public class HarshEnvironmentCapability {
     }
 
     public static void sendUpdatePacket(PlayerEntity player){
-        HarderCore.LOGGER.debug(HarshEnvironmentCapability.getTemp(player) + " " + HarshEnvironmentCapability.getAirQuality(player) + " " + HarshEnvironmentCapability.getThirst(player));
-        if (!player.getEntityWorld().isRemote()){
+       if (!player.getEntityWorld().isRemote()){
 
             PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
                     new HarshEnvironmentPacket(player.getUniqueID(),

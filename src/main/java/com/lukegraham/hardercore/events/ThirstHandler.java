@@ -27,7 +27,6 @@ public class ThirstHandler {
                 else if (temp > 3) amount = 3;
                 else amount = 2;
             }
-            HarderCore.LOGGER.debug("adding thirst: " + amount);
             HarshEnvironmentCapability.addThirst(event.player, amount);
             applyThirst(event.player);
         }
@@ -35,7 +34,7 @@ public class ThirstHandler {
 
     @SubscribeEvent
     public static void removeThirstOnDrink(LivingEntityUseItemEvent.Finish event){
-        boolean isLiquid = event.getItem().getItem() == Items.POTION || event.getItem().getItem() == Items.MILK_BUCKET;
+        boolean isLiquid = event.getItem().getItem() == Items.POTION || event.getItem().getItem() == Items.MILK_BUCKET || event.getItem().getItem() == Items.MELON_SLICE;
         if (isLiquid && event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().getEntityWorld().isRemote()){
             PlayerEntity player = (PlayerEntity) event.getEntityLiving();
             HarshEnvironmentCapability.addThirst(player, -10);
@@ -48,7 +47,6 @@ public class ThirstHandler {
 
         int thirst = HarshEnvironmentCapability.getThirst(player);
         int level = AirQualityHandler.calculateEffectLevel(thirst);
-        HarderCore.LOGGER.debug("thirst: " + thirst);
         player.removePotionEffect(EffectInit.THIRST.get());
         if (level >= 0){
             player.addPotionEffect(new EffectInstance(EffectInit.THIRST.get(), Integer.MAX_VALUE, level, true, false));

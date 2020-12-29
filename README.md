@@ -19,5 +19,8 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - too low quality causes nausea, hunger and damage
 - Water (displayed in top left)
     - deceases over time, more in hot biomes
-    - drink water bottles, potions or milk to increase
+    - drink water bottles, potions or milk (or go for a swim or eat melon) to increase
     - too low causes nausea and damage
+- Chance for buffed mobs to spawn
+    - some give poison or fire on hit
+    - some dodge projectiles (like endermen)

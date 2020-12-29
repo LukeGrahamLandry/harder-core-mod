@@ -64,7 +64,7 @@ public class HelpBook extends WritableBookItem {
         addPage("Being in darkness quickly spawns killer shadows which disappear in light. They drop scales which can craft a charm that stops their spawning while in your inventory or a questionable stew.", pages);
         addPage("Your temperature (displayed in top left) depends on current biome, armor and being in water or on fire. Extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage. ", pages);
         addPage("Your air quality (displayed in top left) is reduced by smelting or placed torches and raised by time spent outside. Too low quality causes nausea, hunger and damage", pages);
-        addPage("Your water level (displayed in top left) deceases over time, more in hot biomes. Drink water bottles, potions, milk or go swimming to increase. Too low causes nausea and damage", pages);
+        addPage("Your water level (displayed in top left) deceases over time, more in hot biomes. Drink water bottles, potions, milk (or go swimming or eat melon) to increase. Too low causes nausea and damage", pages);
         addPage("", pages);
         addPage("", pages);
         return pages;
