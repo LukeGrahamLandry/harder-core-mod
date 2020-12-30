@@ -3,6 +3,7 @@ package com.lukegraham.hardercore.events;
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.EntityInit;
+import com.lukegraham.hardercore.util.Helper;
 import com.lukegraham.hardercore.world_data.HarderCoreData;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -69,7 +70,7 @@ public class BloodMoonHandler {
             if (isBloodMoon(world)){
                 spawnedMobs.forEach((mob) -> {
                     if (mob.isAlive()) {
-                        doParticles(mob, ParticleTypes.LARGE_SMOKE);
+                        Helper.doParticles(mob, ParticleTypes.LARGE_SMOKE);
                         mob.remove();
                     }
                 });
@@ -85,7 +86,7 @@ public class BloodMoonHandler {
             boolean isValidPos = player.getEntityWorld().canSeeSky(new BlockPos(pos)) && mob.attemptTeleport(pos.x, pos.y, pos.z, true);
             if (isValidPos){
                 player.getEntityWorld().addEntity(mob);
-                doParticles(mob, ParticleTypes.LARGE_SMOKE);
+                Helper.doParticles(mob, ParticleTypes.LARGE_SMOKE);
                 return mob;
             }
         }
@@ -121,19 +122,5 @@ public class BloodMoonHandler {
         double z = player.getPosZ() + (rand.nextDouble() - 0.5D) * range;
 
         return new Vector3d(x, y, z);
-    }
-
-    public static void doParticles(LivingEntity mob, IParticleData t){
-        if (!mob.getEntityWorld().isRemote()) {
-            for (int i = 0; i < 20; i++) {
-                AxisAlignedBB box = mob.getBoundingBox();
-                Vector3d pos = box.getCenter().add(randomize(box.getXSize()), randomize(box.getYSize()), randomize(box.getZSize()));
-                ((ServerWorld) mob.getEntityWorld()).spawnParticle(t, pos.x, pos.y, pos.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            }
-        }
-    }
-    private static double randomize(double d){
-        int factor = rand.nextInt(2) == 0 ? 1 : -1;
-        return rand.nextFloat() * (d / 2) * factor;
     }
 }

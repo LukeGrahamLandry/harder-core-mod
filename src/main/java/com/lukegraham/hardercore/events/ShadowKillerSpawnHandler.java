@@ -24,15 +24,13 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ShadowKillerSpawnHandler {
-    private static final Random rand = new Random();
-
     public static void spawnShadowKillersInDarkness(PlayerEntity player){
         World world = player.getEntityWorld();
         if (world.isRemote() || player.isCreative() || player.isSpectator()) return;
         BlockPos pos = player.getPosition();
 
         int light = world.getLight(pos);
-        if (light < 4 && !hasAntiCharm(player) && !world.canSeeSky(player.getPosition())){
+        if (light <= 2 && !hasAntiCharm(player) && !world.canSeeSky(player.getPosition()) && !player.isInWater()){
             boolean isOverworld = player.getEntityWorld().getBiome(player.getPosition()).getCategory() != Biome.Category.NETHER && player.getEntityWorld().getBiome(player.getPosition()).getCategory() != Biome.Category.THEEND;
             if (isOverworld) ShadowKillerEntity.summon(player);
         }
@@ -47,7 +45,9 @@ public class ShadowKillerSpawnHandler {
 
         boolean hasTorch = false;
         if (player.getHeldItem(Hand.OFF_HAND).getItem() == Items.TORCH ||
-                player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.TORCH) hasTorch = true;
+                player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.TORCH ||
+                player.getHeldItem(Hand.OFF_HAND).getItem() == Items.LANTERN ||
+                player.getHeldItem(Hand.MAIN_HAND).getItem() == Items.LANTERN) hasTorch = true;
 
         return hasCharm || hasTorch;
     }

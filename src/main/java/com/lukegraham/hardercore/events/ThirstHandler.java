@@ -41,10 +41,19 @@ public class ThirstHandler {
 
     private static void applyNegativeEffects(PlayerEntity player){
         int thirst = HarshEnvironmentCapability.getThirst(player);
-        int level = AirQualityHandler.calculateEffectLevel(thirst);
+        int level = calculateEffectLevel(thirst);
         player.removePotionEffect(EffectInit.THIRST.get());
         if (level >= 0){
             player.addPotionEffect(new EffectInstance(EffectInit.THIRST.get(), Integer.MAX_VALUE, level, true, false));
         }
+    }
+
+    public static int calculateEffectLevel(int q){
+        if (q < 40) return -1;
+        if (q < 60) return 0;
+        if (q < 80) return 1;
+        if (q < 100) return 2;
+        if (q == 100) return 3;
+        return 4;
     }
 }

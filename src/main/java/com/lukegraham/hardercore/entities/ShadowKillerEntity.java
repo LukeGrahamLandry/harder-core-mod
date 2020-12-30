@@ -2,6 +2,7 @@ package com.lukegraham.hardercore.entities;
 
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.init.EntityInit;
+import com.lukegraham.hardercore.util.Helper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -13,6 +14,7 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SilverfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.SoundEvent;
@@ -47,9 +49,14 @@ public class ShadowKillerEntity extends CreatureEntity {
         int light = world.getLight(this.getPosition());
         LivingEntity target = this.getAttackTarget();
 
-        if (light > 6) this.remove();
-        if (target != null && (!target.isAlive() || this.getDistanceSq(target) > 225)) this.remove();
-        if (target == null) this.remove();
+        if (light > 6) poof();
+        if (target != null && (!target.isAlive() || this.getDistanceSq(target) > 225)) poof();
+        if (target == null) poof();
+    }
+
+    private void poof(){
+        Helper.doParticles(this, ParticleTypes.SQUID_INK);
+        this.remove();
     }
 
     /**

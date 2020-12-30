@@ -17,11 +17,11 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - when warm, drinking water cools you down
     - extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage
     - craft charms to hold in your inventory for immunity to different temperatures
-- Air Quality (displayed above food when poor)
+- Air Quality (displayed above food when not full)
     - reduced by smelting and placed torches, raised by time spent outside
     - too low quality causes nausea, hunger and damage
 - Water (displayed above food)
-    - deceases over time, more in hot biomes
+    - decreases over time, faster in hot biomes
     - drink water bottles, potions or milk (or go for a swim or eat melon) to increase
     - hold lots of water in a hydro flask (upgrade your flask to automatically drink while in your inventory)
     - too low causes nausea and damage
@@ -30,4 +30,9 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - some dodge projectiles (like endermen)
 - Blood moon
     - once every 8 nights hoards of monsters spawn and you can't sleep
+    - mobs spawned by the blood moon disappear at day break
     - can be summoned early with a Totem of the Blood Moon
+- Gravestones
+    - when you die a gravestone holding your items spawns (along with a deadly skeleton)
+    - right click it to return your items to the same slots of your inventory or break it to drop them on the ground
+    - the gravestone is immune to explosions and if you die in a block or the void it will move upwards to the closest air/fluid

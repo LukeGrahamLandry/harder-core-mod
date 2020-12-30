@@ -1,6 +1,7 @@
 package com.lukegraham.hardercore.entities;
 
 import com.lukegraham.hardercore.events.BloodMoonHandler;
+import com.lukegraham.hardercore.util.Helper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -35,7 +36,7 @@ public class WonderingSpiritEntity extends MonsterEntity {
         super.livingTick();
 
         if (!world.isRemote() && !world.isNightTime() && this.world.canSeeSky(this.getPosition())){
-            BloodMoonHandler.doParticles(this, ParticleTypes.SMOKE);
+            Helper.doParticles(this, ParticleTypes.SMOKE);
             this.remove();
         }
     }
@@ -43,7 +44,7 @@ public class WonderingSpiritEntity extends MonsterEntity {
     @Override
     public void onDeath(DamageSource cause) {
         super.onDeath(cause);
-        BloodMoonHandler.doParticles(this, ParticleTypes.SMOKE);
+        Helper.doParticles(this, ParticleTypes.SMOKE);
         this.remove();
     }
 

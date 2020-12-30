@@ -6,10 +6,7 @@ import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironment;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentStorage;
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
-import com.lukegraham.hardercore.init.BlockInit;
-import com.lukegraham.hardercore.init.EffectInit;
-import com.lukegraham.hardercore.init.EntityInit;
-import com.lukegraham.hardercore.init.ItemInit;
+import com.lukegraham.hardercore.init.*;
 import com.lukegraham.hardercore.util.PacketHandler;
 import com.lukegraham.hardercore.world_data.HarderCoreData;
 import net.minecraft.entity.Entity;
@@ -52,6 +49,7 @@ public class HarderCore
         BlockInit.BLOCKS.register(modEventBus);  // registers your blocks
         EntityInit.ENTITY_TYPES.register(modEventBus);
         EffectInit.EFFECTS.register(modEventBus);
+        TileEntityInit.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
