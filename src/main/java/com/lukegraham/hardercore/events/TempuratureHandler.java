@@ -26,14 +26,9 @@ import java.util.Random;
 public class TempuratureHandler {
     private static final Random rand = new Random();
 
-    @SubscribeEvent
-    public static void applyBiomeTemp(TickEvent.PlayerTickEvent event){
-        if (!event.player.getEntityWorld().isRemote() &&  rand.nextInt(1000) == 0) {
-            PlayerEntity player = event.player;
-
-            int temp = updateCurrentTemp(player);
-            applyNegativeEffects(player, temp);
-        }
+    public static void updatePlayerTemp(PlayerEntity player){
+        int temp = updateCurrentTemp(player);
+        applyNegativeEffects(player, temp);
     }
 
     private static void applyNegativeEffects(PlayerEntity player, int temp){
@@ -42,7 +37,7 @@ public class TempuratureHandler {
         int level = calculateEffectLevel(temp);
         if (level == -1) return;
         Effect effect = temp > 0 ? EffectInit.HEAT_STROKE.get() : EffectInit.HYPOTHERMIA.get();
-        player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, true, false));
+        player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, false, false));
     }
 
     private static int calculateEffectLevel(int temp){

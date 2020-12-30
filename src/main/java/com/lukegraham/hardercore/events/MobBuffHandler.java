@@ -71,7 +71,7 @@ public class MobBuffHandler {
         if (!title.equals("")){
             String name = mob.getType().getName().getUnformattedComponentText();
             mob.setCustomName(new StringTextComponent(title + name));
-            mob.setCustomNameVisible(true);
+            // mob.setCustomNameVisible(true);
         }
     }
 
@@ -146,6 +146,4 @@ public class MobBuffHandler {
             return false;
         }
     }
-
-
 }

@@ -27,23 +27,16 @@ public class ExhaustionHandler {
     private static final Random rand = new Random();
 
     @SubscribeEvent
-    public static void checkAndApplyExhaustionRandomly(TickEvent.PlayerTickEvent event){
-        if (rand.nextInt(10000) == 0){
-            applyExhaustion(event.player);
+    public static void removeExhaustionOnSleep(SleepFinishedTimeEvent event){
+        if (!event.getWorld().isRemote()){
+            event.getWorld().getPlayers().forEach(ExhaustionHandler::applyExhaustion);
         }
     }
 
-    @SubscribeEvent
-    public static void removeExhaustionOnSleep(SleepFinishedTimeEvent event){
-        event.getWorld().getPlayers().forEach(ExhaustionHandler::applyExhaustion);
-    }
-
-    private static void applyExhaustion(PlayerEntity player){
-        if (player.getEntityWorld().isRemote()) return;
-
+    public static void applyExhaustion(PlayerEntity player){
         int level = calculateExhaustionLevel(player);
         if (level >= 0){
-            player.addPotionEffect(new EffectInstance(EffectInit.EXHAUSTION.get(), Integer.MAX_VALUE, level, true, false));
+            player.addPotionEffect(new EffectInstance(EffectInit.EXHAUSTION.get(), Integer.MAX_VALUE, level, false, false));
             if (level > 10){
                 player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 50*level, 1, true, false));
             }

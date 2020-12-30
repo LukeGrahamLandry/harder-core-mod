@@ -40,16 +40,12 @@ public class AirQualityHandler {
 
     }
 
-    @SubscribeEvent
-    public static void increaseAirQualityOverTime(TickEvent.PlayerTickEvent event){
-        if (!event.player.getEntityWorld().isRemote() && rand.nextInt(200) == 0) {
-            PlayerEntity player = event.player;
-            int amount = isOutside(player) ? -3 : -1;
-            if (event.player.getEntityWorld().getBiome(event.player.getPosition()).getCategory() == Biome.Category.NETHER){
-                amount = 1;
-            }
-            changeAirQualityAndRecalculateEffects(player, amount);
+    public static void increaseAirQualityOverTime(PlayerEntity player){
+        int amount = isOutside(player) ? -3 : -1;
+        if (player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER){
+            amount = 1;
         }
+        changeAirQualityAndRecalculateEffects(player, amount);
     }
 
     private static boolean isOutside(PlayerEntity player){
@@ -58,7 +54,7 @@ public class AirQualityHandler {
     }
 
     private static void changeAirQualityAndRecalculateEffects(PlayerEntity player, int amount){
-        if (player.getEntityWorld().isRemote()) return;
+        if (player.getEntityWorld().isRemote() || player.isCreative() || player.isSpectator()) return;
 
         HarshEnvironmentCapability.addAirQuality(player, amount);
 
@@ -66,7 +62,7 @@ public class AirQualityHandler {
         player.removePotionEffect(EffectInit.BAD_AIR.get());
         int level = calculateEffectLevel(quality);
         if (level == -1) return;
-        player.addPotionEffect(new EffectInstance(EffectInit.BAD_AIR.get(), Integer.MAX_VALUE, level, true, false));
+        player.addPotionEffect(new EffectInstance(EffectInit.BAD_AIR.get(), Integer.MAX_VALUE, level, false, false));
     }
 
     public static int calculateEffectLevel(int q){

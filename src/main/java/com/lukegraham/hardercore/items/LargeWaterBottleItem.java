@@ -44,9 +44,9 @@ public class LargeWaterBottleItem extends Item {
         if (KeyboardHelper.isHoldingShift()) {
             int water = getWater(stack);
             if (automatic){
-                tooltip.add(new StringTextComponent("Holds an enormous amount of water and automatically drinks for you. Currently holding " + water + " / 1000"));
+                tooltip.add(new StringTextComponent("Holds 100 water units and automatically drinks for you"));
             } else {
-                tooltip.add(new StringTextComponent("Holds lots of water. Currently holding " + water + " / 200"));
+                tooltip.add(new StringTextComponent("Holds 20 water units"));
             }
 
         }

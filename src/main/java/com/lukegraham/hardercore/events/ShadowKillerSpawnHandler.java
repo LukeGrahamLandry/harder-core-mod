@@ -26,19 +26,15 @@ import java.util.Random;
 public class ShadowKillerSpawnHandler {
     private static final Random rand = new Random();
 
-    @SubscribeEvent
-    public static void spawnShadowKillersInDarkness(TickEvent.PlayerTickEvent event){
-        if (rand.nextInt(250) == 0){
-            PlayerEntity player = event.player;
-            World world = player.getEntityWorld();
-            if (world.isRemote()) return;
-            BlockPos pos = player.getPosition();
+    public static void spawnShadowKillersInDarkness(PlayerEntity player){
+        World world = player.getEntityWorld();
+        if (world.isRemote() || player.isCreative() || player.isSpectator()) return;
+        BlockPos pos = player.getPosition();
 
-            int light = world.getLight(pos);
-            if (light < 4 && !hasAntiCharm(player)){
-                boolean isNether = event.player.getEntityWorld().getBiome(event.player.getPosition()).getCategory() == Biome.Category.NETHER;
-                if (!isNether) ShadowKillerEntity.summon(player);
-            }
+        int light = world.getLight(pos);
+        if (light < 4 && !hasAntiCharm(player) && !world.canSeeSky(player.getPosition())){
+            boolean isNether = player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER;
+            if (!isNether) ShadowKillerEntity.summon(player);
         }
     }
 

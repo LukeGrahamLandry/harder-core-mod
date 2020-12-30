@@ -5,6 +5,7 @@ import com.lukegraham.hardercore.capability.harsh_environment.IHarshEnvironment;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironment;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentStorage;
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
+import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.BlockInit;
 import com.lukegraham.hardercore.init.EffectInit;
 import com.lukegraham.hardercore.init.EntityInit;
@@ -56,7 +57,7 @@ public class HarderCore
     private void setup(final FMLCommonSetupEvent event) {
         DeferredWorkQueue.runLater(() -> {
             GlobalEntityTypeAttributes.put(EntityInit.SHADOW_KILLER.get(), ShadowKillerEntity.setCustomAttributes().create());
-
+            GlobalEntityTypeAttributes.put(EntityInit.WONDERING_SPIRIT.get(), WonderingSpiritEntity.setCustomAttributes().create());
         });
 
         CapabilityManager.INSTANCE.register(IHarshEnvironment.class, new HarshEnvironmentStorage(), HarshEnvironment::new);

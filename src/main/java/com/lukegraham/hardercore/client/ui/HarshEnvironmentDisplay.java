@@ -6,17 +6,23 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HarshEnvironmentDisplay {
+    private static final Drawable WATER_DROP = new Drawable("textures/items/anti_shadow_charm.png", 8, 8);
+
     public static void buildOverlay(MatrixStack matrices) {
         PlayerEntity player = Minecraft.getInstance().player;
+
+        int thirst = HarshEnvironmentCapability.getThirst(player);
+        renderWaterBar(thirst);
+
         int temp = HarshEnvironmentCapability.getTemp(player);
         int color = getTempColour(temp);
-
         if (Math.abs(temp) > 15)
         Minecraft.getInstance().fontRenderer.drawString(matrices,Integer.toString(temp), 5, 5, color);
 
@@ -25,10 +31,25 @@ public class HarshEnvironmentDisplay {
         if (quality > 5)
             Minecraft.getInstance().fontRenderer.drawString(matrices, (100 - quality) + "%", 5, 15, color);
 
-        int thirst = HarshEnvironmentCapability.getThirst(player);
-        color = getThirstColour(thirst);
-        if (thirst > 5)
-            Minecraft.getInstance().fontRenderer.drawString(matrices, (100 - thirst) + "%", 5, 25, color);
+
+        // color = getThirstColour(thirst);
+        // if (thirst > 5) Minecraft.getInstance().fontRenderer.drawString(matrices, (100 - thirst) + "%", 5, 25, color);
+
+
+    }
+
+    private static void renderWaterBar(int thirst){
+        int scaledWidth = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        int scaledHeight = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        int j1 = scaledWidth / 2 + 91;
+        int foodY = scaledHeight - 39;
+        int y = foodY - 9;
+
+        for (int posInRow = 0; posInRow < 10; posInRow++){
+            int x = j1 - posInRow * 8 - 9;
+            boolean shouldDraw = thirst < ((10 - posInRow) * 10);
+            if (shouldDraw) WATER_DROP.draw(x, y);
+        }
     }
 
     private static int getTempColour(int temp){
@@ -82,15 +103,12 @@ public class HarshEnvironmentDisplay {
     public static void renderTempText(RenderGameOverlayEvent.Post event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
             PlayerController controller = Minecraft.getInstance().playerController;
-            if (controller == null) {
-                return;
-            }
             PlayerEntity player = Minecraft.getInstance().player;
-            if (player == null) {
+            if (controller == null || player == null ) {
                 return;
             }
 
-            if (!Minecraft.getInstance().gameSettings.showDebugInfo) {
+            if (!Minecraft.getInstance().gameSettings.showDebugInfo && controller.shouldDrawHUD()) {
                 buildOverlay(event.getMatrixStack());
             }
         }
