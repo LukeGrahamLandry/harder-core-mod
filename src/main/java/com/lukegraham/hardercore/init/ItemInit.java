@@ -2,10 +2,7 @@ package com.lukegraham.hardercore.init;
 
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.items.DescribableItem;
-import com.lukegraham.hardercore.items.HelpBook;
-import com.lukegraham.hardercore.items.LargeWaterBottleItem;
-import com.lukegraham.hardercore.items.TemperatureResistCharm;
+import com.lukegraham.hardercore.items.*;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -29,6 +26,7 @@ public class ItemInit {
     public static final RegistryObject<Item> ANTI_HEAT_CHARM = ITEMS.register("anti_heat_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat"));
     public static final RegistryObject<Item> ANTI_COLD_CHARM = ITEMS.register("anti_cold_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "cold"));
     // public static final RegistryObject<Item> ANTI_TEMP_CHARM = ITEMS.register("anti_temp_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat and cold"));
+    public static final RegistryObject<Item> BLOOD_MOON_TOTEM = ITEMS.register("blood_moon_totem", () -> new BloodMoonTotem(props().maxStackSize(1)));
 
     private static RegistryObject<Item> createDescriptionItem(String name, String description){
         return ITEMS.register(name, () -> new DescribableItem(props(), description));

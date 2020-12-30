@@ -67,7 +67,7 @@ public class HelpBook extends WritableBookItem {
         addPage("Your air quality (displayed in top left) is reduced by smelting or placed torches and raised by time spent outside. Too low quality causes nausea, hunger and damage.", pages);
         addPage("Your water level (displayed in top left) deceases over time, more in hot biomes. Drink water bottles, potions, milk (or go swimming or eat melon) to increase. Hold lots of water in a hydro flask (upgrade your flask to automatically drink while in your inventory). Too low causes nausea and damage.", pages);
         addPage("There's a chance for buffed mobs to spawn. Some give poison or fire on hit. Some dodge projectiles (like endermen).", pages);
-        addPage("", pages);
+        addPage("A blood moon happens once every 8 nights. Hoards of monsters spawn and you cannot sleep. Can be summoned early with a Totem of the Blood Moon", pages);
 
         return pages;
     }

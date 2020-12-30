@@ -21,7 +21,7 @@ public class HarshEnvironmentTickHandler {
             HungryHandler.checkAndApplyHungry(player);
             if (rand.nextInt(50) == 0) ExhaustionHandler.applyExhaustion(player);
             if (rand.nextInt(4) == 0) TempuratureHandler.updatePlayerTemp(player);
-            if (rand.nextInt(1) == 0) BloodMoonHandler.spawnSpirits(player);
+            if (rand.nextInt(1) == 0) BloodMoonHandler.spawnMonsters(player);
             AirQualityHandler.increaseAirQualityOverTime(player);
             ThirstHandler.checkAndApplyThirst(player);
         }

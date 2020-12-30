@@ -28,4 +28,6 @@ A minecraft mod for forge 1.16.3 that makes the game harder
 - Chance for buffed mobs to spawn
     - some give poison or fire on hit
     - some dodge projectiles (like endermen)
-- Some nights a hoard of Undead will spawn
+- Blood moon
+    - once every 8 nights hoards of monsters spawn and you can't sleep
+    - can be summoned early with a Totem of the Blood Moon

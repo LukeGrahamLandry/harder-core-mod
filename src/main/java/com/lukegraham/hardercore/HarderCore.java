@@ -11,14 +11,17 @@ import com.lukegraham.hardercore.init.EffectInit;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.init.ItemInit;
 import com.lukegraham.hardercore.util.PacketHandler;
+import com.lukegraham.hardercore.world_data.HarderCoreData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -68,5 +71,4 @@ public class HarderCore
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {}
-
 }

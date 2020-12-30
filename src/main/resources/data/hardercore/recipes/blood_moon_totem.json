@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "item": "hardercore:shadow_scale"
+    }
+  ],
+  "result": {
+    "item": "hardercore:blood_moon_totem"
+  }
+}
