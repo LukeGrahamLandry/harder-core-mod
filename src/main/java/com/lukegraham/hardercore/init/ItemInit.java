@@ -28,7 +28,7 @@ public class ItemInit {
     public static final RegistryObject<Item> AUTO_WATER_BOTTLE = ITEMS.register("auto_water_bottle", () -> new LargeWaterBottleItem(props().maxStackSize(1), true));
     public static final RegistryObject<Item> ANTI_HEAT_CHARM = ITEMS.register("anti_heat_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat"));
     public static final RegistryObject<Item> ANTI_COLD_CHARM = ITEMS.register("anti_cold_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "cold"));
-    public static final RegistryObject<Item> ANTI_TEMP_CHARM = ITEMS.register("anti_temp_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat and cold"));
+    // public static final RegistryObject<Item> ANTI_TEMP_CHARM = ITEMS.register("anti_temp_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat and cold"));
 
     private static RegistryObject<Item> createDescriptionItem(String name, String description){
         return ITEMS.register(name, () -> new DescribableItem(props(), description));

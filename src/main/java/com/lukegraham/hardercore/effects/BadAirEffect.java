@@ -15,7 +15,9 @@ import java.util.Random;
 import java.util.UUID;
 
 public class BadAirEffect extends Effect {
+    DamageSource source = (new DamageSource("bad_air")).setDamageBypassesArmor().setDamageIsAbsolute();
     Random rand = new Random();
+
     public BadAirEffect() {
         super(EffectType.HARMFUL, 0xFFFFFF);
     }
@@ -27,7 +29,7 @@ public class BadAirEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        entity.attackEntityFrom(DamageSource.DROWN, amplifier);
+        entity.attackEntityFrom(source, amplifier);
 
         if (rand.nextInt(2) == 0 && amplifier > 1)
         entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 50 + rand.nextInt(20 + 100 * amplifier), 1, true, false));

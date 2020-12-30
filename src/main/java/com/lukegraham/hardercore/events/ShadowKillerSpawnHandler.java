@@ -33,8 +33,8 @@ public class ShadowKillerSpawnHandler {
 
         int light = world.getLight(pos);
         if (light < 4 && !hasAntiCharm(player) && !world.canSeeSky(player.getPosition())){
-            boolean isNether = player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER;
-            if (!isNether) ShadowKillerEntity.summon(player);
+            boolean isOverworld = player.getEntityWorld().getBiome(player.getPosition()).getCategory() != Biome.Category.NETHER && player.getEntityWorld().getBiome(player.getPosition()).getCategory() != Biome.Category.THEEND;
+            if (isOverworld) ShadowKillerEntity.summon(player);
         }
     }
 

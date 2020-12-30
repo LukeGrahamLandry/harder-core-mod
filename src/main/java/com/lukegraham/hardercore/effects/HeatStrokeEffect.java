@@ -27,7 +27,11 @@ public class HeatStrokeEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        if (amplifier > 2) entity.attackEntityFrom(DamageSource.ON_FIRE, 2.0F);
+        if (amplifier > 0) entity.attackEntityFrom(DamageSource.ON_FIRE, 2.0F);
+        if (amplifier == 2) {
+            entity.setFire(200);
+            entity.attackEntityFrom(DamageSource.ON_FIRE, 10.0F);
+        }
         entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 150 + rand.nextInt(20 + 100 * amplifier), 1, true, false));
     }
 }

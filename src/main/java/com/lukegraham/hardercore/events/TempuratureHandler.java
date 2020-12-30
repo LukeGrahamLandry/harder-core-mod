@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -37,13 +38,13 @@ public class TempuratureHandler {
         int level = calculateEffectLevel(temp);
         if (level == -1) return;
         Effect effect = temp > 0 ? EffectInit.HEAT_STROKE.get() : EffectInit.HYPOTHERMIA.get();
-        player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, false, false));
+        player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, true, false));
     }
 
     private static int calculateEffectLevel(int temp){
         int t = Math.abs(temp);
-        if (t < 50) return -1;
-        return (int) Math.floor(t / 50.0D) - 1;
+        if (t < 100) return -1;
+        return (int) Math.floor(t / 100.0D) - 1;
     }
 
     private static int updateCurrentTemp(PlayerEntity player){
@@ -67,6 +68,7 @@ public class TempuratureHandler {
         if (player.getFireTimer() > 0) tempShift += 25;
         if (player.getPosY() > 100) tempShift -= 5;
         if (player.getPosY() < 10) tempShift += 5;
+        if (tempShift > 0 && player.getActivePotionEffect(Effects.FIRE_RESISTANCE) != null) tempShift = 0;
 
         return tempShift;
     }

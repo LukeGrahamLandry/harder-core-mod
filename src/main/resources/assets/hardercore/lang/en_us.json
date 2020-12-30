@@ -7,6 +7,8 @@
     "item.hardercore.help_book": "Harder Core Help",
     "item.hardercore.water_bottle": "Hydro Flask",
     "item.hardercore.auto_water_bottle": "Automatic Hydro Flask",
+    "item.hardercore.anti_heat_charm": "Charm of Heat Resistance",
+    "item.hardercore.anti_cold_charm": "Charm of Cold Resistance",
 
     "effect.hardercore.hungry": "Starving",
     "effect.hardercore.exhaustion": "Exhaustion",
@@ -15,5 +17,11 @@
     "effect.hardercore.bad_air": "Smokey Lungs",
     "effect.hardercore.thirst": "Dehydration",
 
-    "entity.hardercore.shadow_killer": "Killer Shadow"
+    "entity.hardercore.shadow_killer": "Killer Shadow",
+    "entity.hardercore.wondering_spirit": "Undead",
+
+    "death.attack.hypothermia": "%1$s froze to death",
+    "death.attack.bad_air": "%1$s asphyxiated",
+    "death.attack.thirst": "%1$s died of thirst",
+    "death.attack.exhaustion": "%1$s died of exhaustion"
 }

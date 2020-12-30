@@ -1,5 +1,6 @@
 package com.lukegraham.hardercore.events;
 
+import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironment;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
 import com.lukegraham.hardercore.init.EffectInit;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,8 +32,10 @@ public class ThirstHandler {
         boolean isLiquid = event.getItem().getItem() == Items.POTION || event.getItem().getItem() == Items.MILK_BUCKET || event.getItem().getItem() == Items.MELON_SLICE;
         if (isLiquid && event.getEntityLiving() instanceof PlayerEntity && !event.getEntityLiving().getEntityWorld().isRemote()){
             PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+
             HarshEnvironmentCapability.addThirst(player, -10);
             applyNegativeEffects(player);
+            if (HarshEnvironmentCapability.getTemp(player) > 0) HarshEnvironmentCapability.addTemp(player, -10);
         }
     }
 

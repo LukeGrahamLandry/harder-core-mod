@@ -20,15 +20,15 @@ public class HarshEnvironment implements IHarshEnvironment {
     @Override
     public void addTemp(int amount) {
         temp += amount;
-        temp = Math.max(temp, -255);
-        temp = Math.min(temp, 255);
+        temp = Math.max(temp, -300);
+        temp = Math.min(temp, 300);
     }
 
     @Override
     public void setTemp(int amount) {
         temp = amount;
-        temp = Math.max(temp, -255);
-        temp = Math.min(temp, 255);
+        temp = Math.max(temp, -300);
+        temp = Math.min(temp, 300);
     }
 
     @Override

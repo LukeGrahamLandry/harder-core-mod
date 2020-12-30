@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.TickEvent;
@@ -42,7 +43,7 @@ public class AirQualityHandler {
 
     public static void increaseAirQualityOverTime(PlayerEntity player){
         int amount = isOutside(player) ? -3 : -1;
-        if (player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER){
+        if (player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER || player.areEyesInFluid(FluidTags.WATER)){
             amount = 1;
         }
         changeAirQualityAndRecalculateEffects(player, amount);
@@ -62,7 +63,7 @@ public class AirQualityHandler {
         player.removePotionEffect(EffectInit.BAD_AIR.get());
         int level = calculateEffectLevel(quality);
         if (level == -1) return;
-        player.addPotionEffect(new EffectInstance(EffectInit.BAD_AIR.get(), Integer.MAX_VALUE, level, false, false));
+        player.addPotionEffect(new EffectInstance(EffectInit.BAD_AIR.get(), Integer.MAX_VALUE, level, true, false));
     }
 
     public static int calculateEffectLevel(int q){

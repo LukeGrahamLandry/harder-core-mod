@@ -15,7 +15,9 @@ import java.util.Random;
 import java.util.UUID;
 
 public class ThirstEffect extends Effect {
+    DamageSource source = (new DamageSource("thirst")).setDamageBypassesArmor().setDamageIsAbsolute();
     Random rand = new Random();
+
     public ThirstEffect() {
         super(EffectType.HARMFUL, 0xFFFFFF);
     }
@@ -27,7 +29,7 @@ public class ThirstEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        if (amplifier > 1 && (entity.getHealth() > 5.0F || amplifier == 4)) entity.attackEntityFrom(DamageSource.STARVE, amplifier);
+        if (amplifier > 1 && (entity.getHealth() > 5.0F || amplifier == 4)) entity.attackEntityFrom(source, amplifier);
 
         if (rand.nextInt(amplifier > 2 ? 3 : 10) == 0)
         entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100 + rand.nextInt(20 + 100 * amplifier), amplifier, true, false));
