@@ -18,7 +18,7 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage
     - craft charms to hold in your inventory for immunity to different temperatures
 - Air Quality (displayed above food when not full)
-    - reduced by smelting and placed torches, raised by time spent outside
+    - reduced by being within 3 blocks of fire, torches or lit furnaces, raised by time spent outside
     - too low quality causes nausea, hunger and damage
 - Water (displayed above food)
     - decreases over time, faster in hot biomes

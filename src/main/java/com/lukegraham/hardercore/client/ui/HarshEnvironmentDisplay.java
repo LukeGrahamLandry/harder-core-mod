@@ -86,7 +86,7 @@ public class HarshEnvironmentDisplay {
             throw new ValueException("INVALID TEMP: " + temp);
         }
 
-        texture.draw(5, 5);
+        texture.draw(0, 5);
     }
 
 

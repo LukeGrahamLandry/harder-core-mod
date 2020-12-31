@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,7 +60,7 @@ public class MobBuffHandler {
             title += "Fiery ";
         }
 
-        if (rand.nextInt(20) == 0){
+        if (mob instanceof MonsterEntity && rand.nextInt(20) == 0){
             MobBuffsCapability.addBuff(mob, "ninja");
             title += "Ninja ";
         }

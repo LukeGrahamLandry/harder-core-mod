@@ -3,12 +3,15 @@ package com.lukegraham.hardercore.events;
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
 import com.lukegraham.hardercore.init.EffectInit;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.entity.item.BoatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraft.tileentity.BrewingStandTileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -22,31 +25,39 @@ import java.util.Random;
 public class AirQualityHandler {
     private static final Random rand = new Random();
 
-    @SubscribeEvent
-    public static void reduceAirQualityOnSmelt(PlayerEvent.ItemSmeltedEvent event){
-        PlayerEntity player = event.getPlayer();
-        if (!player.getEntityWorld().isRemote()){
-            int q = (int) (Math.floor(event.getSmelting().getCount() / 8.0D) + 1);
-            changeAirQualityAndRecalculateEffects(player, q);
-        }
-    }
-
-    @SubscribeEvent
-    public static void reduceAirQualityOnTorchPlace(BlockEvent.EntityPlaceEvent event){
-        boolean isPlayer = event.getEntity() instanceof PlayerEntity;
-        boolean isTorch = event.getPlacedBlock().getBlock() == Blocks.TORCH || event.getPlacedBlock().getBlock() == Blocks.WALL_TORCH;
-        if (isPlayer && isTorch){
-            changeAirQualityAndRecalculateEffects((PlayerEntity) event.getEntity(), 2);
-        }
-
-    }
-
     public static void increaseAirQualityOverTime(PlayerEntity player){
         int amount = isOutside(player) ? -3 : -1;
         if (player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER || player.areEyesInFluid(FluidTags.WATER)){
             amount = 1;
         }
+
+        amount += getCloseBlockAirQualityModifiers(player);
         changeAirQualityAndRecalculateEffects(player, amount);
+        HarderCore.LOGGER.debug("air quality increased " + amount);
+    }
+
+    private static int getCloseBlockAirQualityModifiers(PlayerEntity player) {
+        int size = 3;
+        int amount = 0;
+        for (int x=size*-1;x<=size;x++){
+            for (int y=0;y<=size;y++){
+                for (int z=size*-1;z<=size;z++){
+                    BlockPos pos = player.getPosition().add(x, y, z);
+                    amount += getBlockQualityModifier(player.world, pos);
+                }
+            }
+        }
+        return amount;
+    }
+
+    private static int getBlockQualityModifier(World world, BlockPos pos) {
+        BlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        if (block instanceof TorchBlock || block instanceof AbstractFireBlock) return 1;
+        if (block instanceof AbstractFurnaceBlock || block == Blocks.CAMPFIRE){
+            if (state.get(AbstractFurnaceBlock.LIT)) return 3;
+        }
+        return 0;
     }
 
     private static boolean isOutside(PlayerEntity player){
@@ -67,7 +78,11 @@ public class AirQualityHandler {
     }
 
     public static int calculateEffectLevel(int q){
-        if (q < 20) return -1;
-        return (int) Math.floor(q / 20.0D) - 1;
+        if (q < 40) return -1;
+        if (q < 60) return 0;
+        if (q < 80) return 1;
+        if (q < 100) return 2;
+        if (q == 100) return 3;
+        return 4;
     }
 }

@@ -12,7 +12,7 @@ public class HarshEnvironmentTickHandler {
     private static final Random rand = new Random();
 
     @SubscribeEvent
-    public static void checkAndApplyThirstRandomly(TickEvent.PlayerTickEvent event){
+    public static void updateHarshEnvironmentRandomly(TickEvent.PlayerTickEvent event){
         boolean validPlayer = !event.player.getEntityWorld().isRemote() && !(event.player.isSpectator() || event.player.isCreative());
         if (validPlayer && rand.nextInt(200) == 0){
             PlayerEntity player = event.player;
@@ -21,8 +21,8 @@ public class HarshEnvironmentTickHandler {
             HungryHandler.checkAndApplyHungry(player);
             if (rand.nextInt(50) == 0) ExhaustionHandler.applyExhaustion(player);
             if (rand.nextInt(4) == 0) TempuratureHandler.updatePlayerTemp(player);
-            if (rand.nextInt(1) == 0) BloodMoonHandler.spawnMonsters(player);
-            AirQualityHandler.increaseAirQualityOverTime(player);
+            BloodMoonHandler.spawnMonsters(player);
+            if (rand.nextInt(2) == 0) AirQualityHandler.increaseAirQualityOverTime(player);
             ThirstHandler.checkAndApplyThirst(player);
         }
     }

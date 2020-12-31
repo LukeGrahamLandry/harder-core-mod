@@ -29,9 +29,13 @@ public class BadAirEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        entity.attackEntityFrom(source, amplifier);
+        entity.attackEntityFrom(source, amplifier + 1);
+        if (amplifier >= 3) entity.attackEntityFrom(source, 10);
 
-        if (rand.nextInt(2) == 0 && amplifier > 1)
-        entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 50 + rand.nextInt(20 + 100 * amplifier), 1, true, false));
+        if (rand.nextInt(2) == 0 && amplifier >= 1)
+            entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 50 + rand.nextInt(20 + 100 * amplifier), 1, true, false));
+
+        if (amplifier >= 2)
+            entity.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 100, 0, true, false));
     }
 }

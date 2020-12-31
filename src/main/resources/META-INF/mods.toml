@@ -19,7 +19,7 @@ modId="hardercore" #mandatory
 version="${file.jarVersion}" #mandatory
 
 # A display name for the mod
-displayName="My First Mod" #mandatory
+displayName="Harder Core" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="http://myurl.me/" #optional
@@ -31,14 +31,14 @@ displayURL="http://example.com/" #optional
 logoFile="examplemod.png" #optional
 
 # A text field displayed in the mod UI
-credits="It was made by Luke" #optional
+credits="Thanks to Louis for play testing and smokiness opinions" #optional
 
 # A text field displayed in the mod UI
-authors="Luke" #optional
+authors="Luke Graham Landry" #optional
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Making everything harder since 2021
+Making everything harder since 2021. See code and feature list at https://github.com/LukeGrahamLandry/harder-core-mod
 '''
 
 [[dependencies.hardercore]] #optional

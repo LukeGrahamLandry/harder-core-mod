@@ -58,11 +58,21 @@ public class GraveHandler {
         player.inventory.armorInventory.clear();
         player.inventory.offHandInventory.clear();
 
-        player.getEntityWorld().setBlockState(pos, BlockInit.GRAVE.get().getDefaultState());
-        GraveTileEntity tile = (GraveTileEntity) player.getEntityWorld().getTileEntity(pos);
-        tile.setStacks(stacks);
+        boolean hasItems = false;
+        for (ItemStack stack : stacks){
+            if (!stack.isEmpty()){
+                hasItems = true;
+                break;
+            }
+        }
 
-        player.sendMessage(new StringTextComponent("Your grave is at (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")"), player.getUniqueID());
+        if (hasItems){
+            player.getEntityWorld().setBlockState(pos, BlockInit.GRAVE.get().getDefaultState());
+            GraveTileEntity tile = (GraveTileEntity) player.getEntityWorld().getTileEntity(pos);
+            tile.setStacks(stacks);
+
+            player.sendMessage(new StringTextComponent("Your grave is at (" + pos.getX() + ", " + pos.getY() + ", " + pos.getZ() + ")"), player.getUniqueID());
+        }
     }
 
     private static void spawnGhost(World world, BlockPos pos) {
