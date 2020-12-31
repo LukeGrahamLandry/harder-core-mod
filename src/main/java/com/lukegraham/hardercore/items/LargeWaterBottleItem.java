@@ -73,7 +73,7 @@ public class LargeWaterBottleItem extends Item {
     }
 
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entity) {
-        if (!worldIn.isRemote && getWater(stack) > 10) {
+        if (!worldIn.isRemote && getWater(stack) >= 10) {
             HarshEnvironmentCapability.addThirst((PlayerEntity) entity, -10);
             addWater(stack, -10);
         }
@@ -112,8 +112,8 @@ public class LargeWaterBottleItem extends Item {
             }
         }
 
-        boolean isThirsty = HarshEnvironmentCapability.getThirst(playerIn) > 0;
-        if (getWater(itemstack) > 10 && isThirsty){
+        boolean isThirsty = HarshEnvironmentCapability.getThirst(playerIn) >= 10;
+        if (getWater(itemstack) >= 10 && isThirsty){
             playerIn.setActiveHand(handIn);
             return ActionResult.resultSuccess(itemstack);
         }
@@ -122,7 +122,7 @@ public class LargeWaterBottleItem extends Item {
     }
 
     public boolean showDurabilityBar(ItemStack stack){
-        return true;
+        return getWater(stack) < (this.automatic ? 1000 : 200);
     }
 
     // @return 0.0 for 100% (no damage / full bar), 1.0 for 0% (fully damaged / empty bar)

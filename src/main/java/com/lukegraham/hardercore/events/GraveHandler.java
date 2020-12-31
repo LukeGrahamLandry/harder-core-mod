@@ -1,16 +1,14 @@
 package com.lukegraham.hardercore.events;
 
-import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.BlockInit;
-import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.tile_entity.GraveTileEntity;
+import net.minecraft.block.TallGrassBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
@@ -40,7 +38,9 @@ public class GraveHandler {
 
         // dont spawn grave in a block
         for (int i=0;i<32;i++){
-            boolean valid = player.getEntityWorld().getBlockState(pos.up(i)).isAir() || !player.getEntityWorld().getFluidState(pos.up(i)).isEmpty();
+            boolean valid = player.getEntityWorld().getBlockState(pos.up(i)).isAir() ||
+                    player.getEntityWorld().getBlockState(pos.up(i)).getBlock() instanceof TallGrassBlock ||
+                    !player.getEntityWorld().getFluidState(pos.up(i)).isEmpty();
             if (valid){
                 pos = pos.up(i);
                 break;

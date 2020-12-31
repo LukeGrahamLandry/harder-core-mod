@@ -1,11 +1,15 @@
 package com.lukegraham.hardercore.util;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.List;
 import java.util.Random;
 
 public class Helper {
@@ -27,5 +31,16 @@ public class Helper {
 
     public static int randInt(int bound){
         return rand.nextInt(bound);
+    }
+
+    public static List<Entity> getNearbyEntities(World world, BlockPos pos, int range){
+        return world.getEntitiesWithinAABBExcludingEntity(null, getAABB(pos, range));
+    }
+
+    public static AxisAlignedBB getAABB(BlockPos pos, int range) {
+        double x = pos.getX();
+        double y = pos.getY();
+        double z = pos.getZ();
+        return new AxisAlignedBB(x-range,y-range,z-range,x+range,y+range,z+range);
     }
 }

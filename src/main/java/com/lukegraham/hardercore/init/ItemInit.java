@@ -16,7 +16,7 @@ public class ItemInit {
     public static final RegistryObject<Item> SHADOW_SCALE = createDescriptionItem("shadow_scale", "Dropped by the killer shadows that spawn in darkness");
     public static final RegistryObject<Item> ANTI_SHADOW_CHARM = createDescriptionItem("anti_shadow_charm", "No killer shadows will haunt you with this in your inventory. Explore the darkness freely");
     public static final RegistryObject<Item> SHADOW_FOOD = ITEMS.register("shadow_food", () -> new DescribableItem(props()
-            .maxStackSize(1).food(new Food.Builder().hunger(20).saturation(20)
+            .maxStackSize(1).food(new Food.Builder().hunger(20).saturation(0)
                     .effect(() -> new EffectInstance(Effects.POISON, 15*20), 1F)
                     .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 16*60*20), 1F).build()),
             "Gives lots of hunger, night vision and brief poison"));
@@ -45,7 +45,7 @@ public class ItemInit {
 
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(SHADOW_SCALE.get());
+            return new ItemStack(BLOOD_MOON_TOTEM.get());
         }
     }
 

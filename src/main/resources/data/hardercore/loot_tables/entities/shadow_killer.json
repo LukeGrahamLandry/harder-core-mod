@@ -7,12 +7,7 @@
             "type": "item",
             "name": "hardercore:shadow_scale",
             "weight": 1
-        },
-        {
-          "type": "empty",
-          "weight": 4
         }
-
       ]
     }]
   }

@@ -3,8 +3,11 @@ package com.lukegraham.hardercore.events;
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
 import com.lukegraham.hardercore.init.EffectInit;
+import com.lukegraham.hardercore.util.Helper;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.BoatEntity;
+import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.tags.FluidTags;
@@ -19,6 +22,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -31,12 +35,12 @@ public class AirQualityHandler {
             amount = 1;
         }
 
-        amount += getCloseBlockAirQualityModifiers(player);
+        amount += getProximityQualityModifiers(player);
         changeAirQualityAndRecalculateEffects(player, amount);
         HarderCore.LOGGER.debug("air quality increased " + amount);
     }
 
-    private static int getCloseBlockAirQualityModifiers(PlayerEntity player) {
+    private static int getProximityQualityModifiers(PlayerEntity player) {
         int size = 3;
         int amount = 0;
         for (int x=size*-1;x<=size;x++){
@@ -47,6 +51,10 @@ public class AirQualityHandler {
                 }
             }
         }
+
+        List<Entity> blazes = player.getEntityWorld().getEntitiesWithinAABB(BlazeEntity.class, Helper.getAABB(player.getPosition(), size));
+        amount += blazes.size();
+
         return amount;
     }
 
