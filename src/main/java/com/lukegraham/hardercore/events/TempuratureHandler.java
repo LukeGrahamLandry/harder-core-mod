@@ -4,8 +4,13 @@ import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapProvider;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
 import com.lukegraham.hardercore.init.EffectInit;
+import com.lukegraham.hardercore.util.Helper;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +19,8 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -21,12 +28,11 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.List;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TempuratureHandler {
-    private static final Random rand = new Random();
-
     public static void updatePlayerTemp(PlayerEntity player){
         int temp = updateCurrentTemp(player);
         applyNegativeEffects(player, temp);
@@ -38,6 +44,7 @@ public class TempuratureHandler {
         int level = calculateEffectLevel(temp);
         if (level == -1) return;
         Effect effect = temp > 0 ? EffectInit.HEAT_STROKE.get() : EffectInit.HYPOTHERMIA.get();
+        if (temp > 0 && player.getActivePotionEffect(Effects.FIRE_RESISTANCE) != null) return;
         player.addPotionEffect(new EffectInstance(effect, Integer.MAX_VALUE, level, true, false));
     }
 
@@ -50,6 +57,7 @@ public class TempuratureHandler {
     private static int updateCurrentTemp(PlayerEntity player){
         int oldTemp = HarshEnvironmentCapability.getTemp(player);
         int tempShift = calculateTotalTempShift(player);
+        HarderCore.LOGGER.debug("temp increased " + tempShift);
 
         HarshEnvironmentCapability.addTemp(player, tempShift);
         return oldTemp + tempShift;
@@ -68,9 +76,42 @@ public class TempuratureHandler {
         if (player.getFireTimer() > 0) tempShift += 25;
         if (player.getPosY() > 100) tempShift -= 5;
         if (player.getPosY() < 10) tempShift += 5;
+        tempShift += getProximityQualityModifiers(player);
         if (tempShift > 0 && player.getActivePotionEffect(Effects.FIRE_RESISTANCE) != null) tempShift = 0;
 
+        if (tempShift == 0){
+            if (oldTemp > 0) tempShift = -1;
+            if (oldTemp < 0) tempShift = 1;
+        }
+
         return tempShift;
+    }
+
+    private static int getProximityQualityModifiers(PlayerEntity player) {
+        int size = 3;
+        int amount = 0;
+        for (int x=size*-1;x<=size;x++){
+            for (int y=0;y<=size;y++){
+                for (int z=size*-1;z<=size;z++){
+                    BlockPos pos = player.getPosition().add(x, y, z);
+                    amount += getBlockQualityModifier(player.world, pos);
+                }
+            }
+        }
+
+        return amount;
+    }
+
+    private static int getBlockQualityModifier(World world, BlockPos pos) {
+        BlockState state = world.getBlockState(pos);
+        Fluid fluid = world.getFluidState(pos).getFluid();
+        Block block = state.getBlock();
+        if (block instanceof AbstractFireBlock || fluid == Fluids.LAVA) return 1;
+        if (block instanceof AbstractFurnaceBlock || block == Blocks.CAMPFIRE){
+            if (state.get(AbstractFurnaceBlock.LIT)) return 2;
+        }
+        if (block == Blocks.ICE || block == Blocks.PACKED_ICE || block == Blocks.BLUE_ICE) return -1;
+        return 0;
     }
 
     private static int calculateArmorWarmth(PlayerEntity player){

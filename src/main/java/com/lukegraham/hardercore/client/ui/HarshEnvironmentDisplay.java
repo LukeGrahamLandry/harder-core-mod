@@ -17,6 +17,7 @@ public class HarshEnvironmentDisplay {
     private static final Drawable WATER_DROP = new Drawable("textures/gui/water_drop.png", 8, 8);
     private static final Drawable EMPTY_DROP = new Drawable("textures/gui/empty_drop.png", 8, 8);
     private static final Drawable GAS_MASK = new Drawable("textures/gui/bad_air.png", 8, 8);
+    private static final Drawable EMPTY_GAS_MASK = new Drawable("textures/gui/empty_air.png", 8, 8);
 
     private static final Drawable MAX_COLD = new Drawable("textures/gui/temp/max_cold.png", 24, 24);
     private static final Drawable COLD = new Drawable("textures/gui/temp/cold.png", 24, 24);
@@ -61,6 +62,7 @@ public class HarshEnvironmentDisplay {
             int x = j1 - posInRow * 8 - 9;
             boolean shouldDraw = quality < ((10 - posInRow) * 10);
             if (shouldDraw) GAS_MASK.draw(x, y);
+            else EMPTY_GAS_MASK.draw(x, y);
         }
     }
 

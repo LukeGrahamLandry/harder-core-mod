@@ -20,7 +20,7 @@ public class HarshEnvironmentTickHandler {
             ShadowKillerSpawnHandler.spawnShadowKillersInDarkness(player);
             HungryHandler.checkAndApplyHungry(player);
             if (rand.nextInt(50) == 0) ExhaustionHandler.applyExhaustion(player);
-            if (rand.nextInt(4) == 0) TempuratureHandler.updatePlayerTemp(player);
+            if (rand.nextInt(3) == 0) TempuratureHandler.updatePlayerTemp(player);
             BloodMoonHandler.spawnMonsters(player);
             if (rand.nextInt(2) == 0) AirQualityHandler.increaseAirQualityOverTime(player);
             ThirstHandler.checkAndApplyThirst(player);

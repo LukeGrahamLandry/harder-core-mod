@@ -27,6 +27,7 @@ public class ItemInit {
     public static final RegistryObject<Item> ANTI_COLD_CHARM = ITEMS.register("anti_cold_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "cold"));
     // public static final RegistryObject<Item> ANTI_TEMP_CHARM = ITEMS.register("anti_temp_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat and cold"));
     public static final RegistryObject<Item> BLOOD_MOON_TOTEM = ITEMS.register("blood_moon_totem", () -> new BloodMoonTotem(props().maxStackSize(1)));
+    public static final RegistryObject<Item> OXYGEN_CANISTER = ITEMS.register("oxygen_canister", () -> new OxygenCanister(props().maxStackSize(1), false));
 
     private static RegistryObject<Item> createDescriptionItem(String name, String description){
         return ITEMS.register(name, () -> new DescribableItem(props(), description));

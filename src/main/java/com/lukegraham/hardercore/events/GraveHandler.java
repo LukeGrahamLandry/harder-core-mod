@@ -1,9 +1,13 @@
 package com.lukegraham.hardercore.events;
 
+import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.BlockInit;
+import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.tile_entity.GraveTileEntity;
 import net.minecraft.block.TallGrassBlock;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -76,11 +80,9 @@ public class GraveHandler {
     }
 
     private static void spawnGhost(World world, BlockPos pos) {
-        SkeletonEntity mob = new SkeletonEntity(EntityType.SKELETON, world);
+        MobEntity mob = new WonderingSpiritEntity(EntityInit.WONDERING_SPIRIT.get(), world);
         mob.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
         mob.enablePersistence();
-        mob.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, Integer.MAX_VALUE, 0, true, false));
-        mob.addPotionEffect(new EffectInstance(Effects.STRENGTH, Integer.MAX_VALUE, 0, true, false));
         world.addEntity(mob);
     }
 }

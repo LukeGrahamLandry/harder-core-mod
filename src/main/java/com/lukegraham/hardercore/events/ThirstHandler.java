@@ -17,7 +17,7 @@ public class ThirstHandler {
     private static final Random rand = new Random();
 
     public static void checkAndApplyThirst(PlayerEntity player){
-        int amount = player.isInWater() ? -1 : 1;
+        int amount = player.isInWater() ? -5 : 1;
         int temp = TempuratureHandler.getBiomeTempShift(player);
         if (temp > 0 && amount > 0 && rand.nextInt(2) == 0){
             if (temp > 6) amount = 3;

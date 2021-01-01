@@ -85,7 +85,7 @@ public class LargeWaterBottleItem extends Item {
      * How long it takes to use or consume an item
      */
     public int getUseDuration(ItemStack stack) {
-        return 32;
+        return 16;
     }
 
     /**

@@ -13,13 +13,14 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - Not sleeping causes slowness, reduced attack speed, nausea and death
     - Eating raw meat gives nausea and either poison or hunger
 - Temperature (displayed in top left)
-    - depends on biome, armor and being in water or on fire
+    - effected by biome, armor, being on fire and nearby blocks
     - when warm, drinking water cools you down
     - extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage
     - craft charms to hold in your inventory for immunity to different temperatures
 - Air Quality (displayed above food when not full)
     - reduced by being within 3 blocks of fire, torches, blazes or lit furnaces, raised by time spent outside
     - too low quality causes nausea, hunger and damage
+    - oxygen canisters slowly fill up with air, drink from them to recover air quality (or breath bubbles) quickly
 - Water (displayed above food)
     - decreases over time, faster in hot biomes
     - drink water bottles, potions or milk (or go for a swim or eat melon) to increase

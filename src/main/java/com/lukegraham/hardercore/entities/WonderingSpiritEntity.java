@@ -31,36 +31,15 @@ public class WonderingSpiritEntity extends MonsterEntity {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
-    @Override
-    public void livingTick() {
-        super.livingTick();
-
-        if (!world.isRemote() && !world.isNightTime() && this.world.canSeeSky(this.getPosition())){
-            Helper.doParticles(this, ParticleTypes.SMOKE);
-            this.remove();
-        }
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        super.onDeath(cause);
-        Helper.doParticles(this, ParticleTypes.SMOKE);
-        this.remove();
-    }
-
-    @Override
-    protected void onDeathUpdate() {}
-
-
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MonsterEntity.func_234295_eP_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 30.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.23F)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 3.0D);
+                .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25F)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
 
     @Override
     protected int getExperiencePoints(PlayerEntity player) {
-        return 7;
+        return 0;
     }
 }

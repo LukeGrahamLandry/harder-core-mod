@@ -27,17 +27,21 @@ import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AirQualityHandler {
-    private static final Random rand = new Random();
-
     public static void increaseAirQualityOverTime(PlayerEntity player){
+        int amount = calculateTotalQualityShift(player);
+        changeAirQualityAndRecalculateEffects(player, amount);
+        HarderCore.LOGGER.debug("air quality increased " + amount);
+    }
+
+    public static int calculateTotalQualityShift(PlayerEntity player){
         int amount = isOutside(player) ? -3 : -1;
         if (player.getEntityWorld().getBiome(player.getPosition()).getCategory() == Biome.Category.NETHER || player.areEyesInFluid(FluidTags.WATER)){
             amount = 1;
         }
 
         amount += getProximityQualityModifiers(player);
-        changeAirQualityAndRecalculateEffects(player, amount);
-        HarderCore.LOGGER.debug("air quality increased " + amount);
+
+        return amount;
     }
 
     private static int getProximityQualityModifiers(PlayerEntity player) {
