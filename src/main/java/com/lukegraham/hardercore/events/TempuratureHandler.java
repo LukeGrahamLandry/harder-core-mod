@@ -84,6 +84,13 @@ public class TempuratureHandler {
             if (oldTemp < 0) tempShift = 1;
         }
 
+        if (Math.signum(tempShift) != Math.signum(oldTemp)){
+            if (oldTemp > 0) tempShift = -5;
+            if (oldTemp < 0) tempShift = 5;
+        }
+
+
+
         return tempShift;
     }
 

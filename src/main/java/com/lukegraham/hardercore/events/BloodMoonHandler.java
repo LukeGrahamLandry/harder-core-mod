@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IServerWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
@@ -34,7 +35,7 @@ public class BloodMoonHandler {
 
     public static boolean isBloodMoon(World world){
         int sleeps = HarderCoreData.getInstance(world).getSleeps();
-        return sleeps % 8 == 0;
+        return (sleeps + 1) % 8 == 0;
     }
 
     public static void spawnMonsters(PlayerEntity player) {
@@ -83,7 +84,10 @@ public class BloodMoonHandler {
     private static MobEntity trySummonNearPlayer(PlayerEntity player, MobEntity mob){
         for (int i=0;i<32;i++){
             Vector3d pos = randPos(player);
-            boolean isValidPos = player.getEntityWorld().canSeeSky(new BlockPos(pos)) && mob.attemptTeleport(pos.x, pos.y, pos.z, true);
+            boolean canSeeSky = player.getEntityWorld().canSeeSky(new BlockPos(pos));
+            boolean isDark = player.getEntityWorld().getLightFor(LightType.BLOCK, new BlockPos(pos)) < 2;
+            boolean isValidPos = canSeeSky && isDark && mob.attemptTeleport(pos.x, pos.y, pos.z, true);
+            HarderCore.LOGGER.debug(isDark);
             if (isValidPos){
                 player.getEntityWorld().addEntity(mob);
                 Helper.doParticles(mob, ParticleTypes.LARGE_SMOKE);

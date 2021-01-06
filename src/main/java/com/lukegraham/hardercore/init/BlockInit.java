@@ -3,6 +3,7 @@ package com.lukegraham.hardercore.init;
 import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.blocks.GraveBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public class BlockInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HarderCore.MOD_ID);
 
     public static final RegistryObject<Block> GRAVE = BLOCKS.register("grave",
-            () -> new GraveBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.0F, Integer.MAX_VALUE).setLightLevel((state) -> 8)));
+            () -> new GraveBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.0F, 3600000.0F).setLightLevel((state) -> 8)));
 
 
     // automaticlly creates items for all blocks

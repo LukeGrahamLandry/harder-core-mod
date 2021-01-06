@@ -1,5 +1,6 @@
 package com.lukegraham.hardercore.events;
 
+import com.lukegraham.hardercore.HarderCore;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -7,6 +8,8 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
 
+
+// !!! STUFF DOESNT HAPPEN WHEN YOU'RE IN CREATIVE MODE !!!
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class HarshEnvironmentTickHandler {
     private static final Random rand = new Random();

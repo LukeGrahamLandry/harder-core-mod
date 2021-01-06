@@ -34,6 +34,6 @@ A minecraft mod for forge 1.16.3 that makes the game harder
     - mobs spawned by the blood moon disappear at day break
     - can be summoned early with a Totem of the Blood Moon
 - Gravestones
-    - when you die a gravestone holding your items spawns (along with a deadly skeleton)
+    - when you die a gravestone holding your items spawns (along with an undead)
     - right click it to return your items to the same slots of your inventory or break it to drop them on the ground
     - the gravestone is immune to explosions and if you die in a block or the void it will move upwards to the closest air/fluid
