@@ -1,0 +1,23 @@
+{
+  "name": "Thirst",
+  "icon": "hardercore:hydroflask",
+  "category": "hardercore:harsh_environment",
+  "pages": [
+    {
+      "type": "text",
+      "title": "The Thirst Bar",
+      "text": "You now need to drink water! Over time your water bar (shown above hunger) will decrease (faster in hot environments). Replenish water by drinking water bottles, potions or milk. You also slowly gain hydration by being in water. "
+    },
+    {
+      "type": "crafting",
+      "title": "The HydroFlask",
+      "recipe": "hardercore:hydroflask",
+      "text": "Drinking from water bottles will quickly get tedious as they hold a small amount of water and don't stack. Craft a hydroflask to store twice your water bar for easy drinking. Refill by right clicking a water source block. You can also upgrade your flask to hold 5 times more water and drink automatically by crafting it with a diamond"
+    },
+    {
+      "type": "text",
+      "title": "Dehydration",
+      "text": "If you forget to drink you will get the dehydration effect. At 4 missing water drops you will start to get nauseous. After 6 you will take not lethal damage over time. Once you have an empty water bar the damage can kill you"
+    }
+  ]
+}

@@ -2,6 +2,9 @@
  
 A minecraft mod for forge 1.16.3 that makes the game harder
 
+## Download 
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/harder-core)
+
 ## Features 
 - Killer shadows
     - Spawn quickly in darkness and die immediately in daylight

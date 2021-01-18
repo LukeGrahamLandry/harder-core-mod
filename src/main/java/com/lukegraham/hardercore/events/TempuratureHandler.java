@@ -128,8 +128,8 @@ public class TempuratureHandler {
             if (item instanceof ArmorItem){
                 boolean isLeather = ((ArmorItem) item).getArmorMaterial().getRepairMaterial().test(new ItemStack(Items.LEATHER));
                 if (isLeather) clothesBonus += 5;
-            } else if (stack != ItemStack.EMPTY){
-                clothesBonus += 2;
+                else
+                    clothesBonus += 2;
             }
         }
         return clothesBonus;

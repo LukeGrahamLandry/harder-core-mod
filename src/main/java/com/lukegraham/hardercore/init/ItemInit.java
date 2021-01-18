@@ -20,7 +20,7 @@ public class ItemInit {
                     .effect(() -> new EffectInstance(Effects.POISON, 15*20), 1F)
                     .effect(() -> new EffectInstance(Effects.NIGHT_VISION, 16*60*20), 1F).build()),
             "Gives lots of hunger, night vision and brief poison"));
-    public static final RegistryObject<Item> HELP_BOOK = ITEMS.register("help_book", () -> new HelpBook(props()));
+    // public static final RegistryObject<Item> HELP_BOOK = ITEMS.register("help_book", () -> new HelpBook(props()));
     public static final RegistryObject<Item> WATER_BOTTLE = ITEMS.register("water_bottle", () -> new LargeWaterBottleItem(props().maxStackSize(1), false));
     public static final RegistryObject<Item> AUTO_WATER_BOTTLE = ITEMS.register("auto_water_bottle", () -> new LargeWaterBottleItem(props().maxStackSize(1), true));
     public static final RegistryObject<Item> ANTI_HEAT_CHARM = ITEMS.register("anti_heat_charm", () -> new TemperatureResistCharm(props().maxStackSize(1), "heat"));
