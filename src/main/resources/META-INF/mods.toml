@@ -4,7 +4,7 @@ license="All rights reserved"
 modLoader="javafml" #mandatory
 
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="https://github.com/LukeGrahamLandry/harder-core-mod/issues" #optional
@@ -22,7 +22,7 @@ version="${file.jarVersion}" #mandatory
 displayName="Harder Core" #mandatory
 
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://myurl.me/" #optional
+#updateJSONURL="http://myurl.me/" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/LukeGrahamLandry/harder-core-mod" #optional
@@ -51,6 +51,6 @@ Making everything harder since 2021
 [[dependencies.hardercore]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16,3]"
+    versionRange="[1.16,5]"
     ordering="NONE"
     side="BOTH"

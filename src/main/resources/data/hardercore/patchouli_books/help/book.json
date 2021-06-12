@@ -1,8 +1,0 @@
-{
-  "name": "Harder Core Help",
-  "landing_text": "Welcome to Harder Core! $(l:https://github.com/LukeGrahamLandry/harder-core-mod) This mod is open source $(/l)",
-  "version": 1,
-  "model": "hardercore:help_book",
-  "creative_tab": "firstmod"
-}
-

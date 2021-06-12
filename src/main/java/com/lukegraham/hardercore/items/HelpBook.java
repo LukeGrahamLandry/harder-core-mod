@@ -8,9 +8,7 @@ import net.minecraft.client.gui.screen.ReadBookScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BookItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.WritableBookItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
@@ -107,8 +105,8 @@ public class HelpBook extends WritableBookItem {
                 if (!persistent.contains(NBT_KEY)) {
                     persistent.putBoolean(NBT_KEY, true);
 
-                    // ItemStack stack = new ItemStack(ItemInit.HELP_BOOK.get());
-                    // player.inventory.addItemStackToInventory(stack);
+                    ItemStack stack = new ItemStack(ItemInit.HELP_BOOK.get());
+                    player.inventory.addItemStackToInventory(stack);
                 }
             }
         }
