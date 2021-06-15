@@ -1,14 +1,12 @@
 package com.lukegraham.hardercore.events;
 
-import com.lukegraham.hardercore.init.EffectInit;
+import com.lukegraham.hardercore.config.HarderCoreConfig;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +21,7 @@ public class FoodPoisoningHandler {
     public static void foodPoisoningOnEat(LivingEntityUseItemEvent.Finish event){
         LivingEntity entity = event.getEntityLiving();
         if (!entity.getEntityWorld().isRemote()){
-            if (isRaw(event.getItem())){
+            if (HarderCoreConfig.doFoodPoisoning.get() && isRaw(event.getItem())){
                 int scale = rand.nextInt(15);
                 int amp = rand.nextInt(10) == 0? 1: 0;
                 entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100 + (30 * scale), amp));

@@ -1,18 +1,14 @@
 package com.lukegraham.hardercore.events;
 
+import com.lukegraham.hardercore.config.HarderCoreConfig;
 import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.BlockInit;
 import com.lukegraham.hardercore.init.EntityInit;
 import com.lukegraham.hardercore.tile_entity.GraveTileEntity;
 import net.minecraft.block.TallGrassBlock;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
@@ -25,7 +21,8 @@ import net.minecraftforge.fml.common.Mod;
 public class GraveHandler {
     @SubscribeEvent
     public static void makeGraveOnDeath(LivingDeathEvent event){
-        if (event.getEntity() instanceof PlayerEntity && !event.getEntity().getEntityWorld().isRemote()){
+        if (HarderCoreConfig.doGraves.get() &&
+                event.getEntity() instanceof PlayerEntity && !event.getEntity().getEntityWorld().isRemote()){
             PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
             BlockPos pos = calculateGravePosition(player);

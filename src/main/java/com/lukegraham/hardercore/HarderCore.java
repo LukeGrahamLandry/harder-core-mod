@@ -3,6 +3,7 @@ package com.lukegraham.hardercore;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironment;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentStorage;
 import com.lukegraham.hardercore.capability.harsh_environment.IHarshEnvironment;
+import com.lukegraham.hardercore.config.HarderCoreConfig;
 import com.lukegraham.hardercore.entities.ShadowKillerEntity;
 import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
 import com.lukegraham.hardercore.init.*;
@@ -12,9 +13,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +38,9 @@ public class HarderCore {
         EntityInit.ENTITY_TYPES.register(modEventBus);
         EffectInit.EFFECTS.register(modEventBus);
         TileEntityInit.TILE_ENTITY_TYPES.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HarderCoreConfig.server_config);
+        HarderCoreConfig.loadConfig(HarderCoreConfig.server_config, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + ".toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
     }

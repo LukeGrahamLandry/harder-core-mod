@@ -1,13 +1,11 @@
 package com.lukegraham.hardercore.client.ui;
 
-import com.lukegraham.hardercore.HarderCore;
 import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapability;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.lukegraham.hardercore.config.ClientConfigValues;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -102,9 +100,12 @@ public class HarshEnvironmentDisplay {
             }
 
             if (!Minecraft.getInstance().gameSettings.showDebugInfo && controller.shouldDrawHUD()) {
-                renderWaterBar(player);
-                renderAirBar(player);
-                renderThermometer(player);
+                if (ClientConfigValues.doThirst)
+                    renderWaterBar(player);
+                if (ClientConfigValues.doAirQuality)
+                    renderAirBar(player);
+                if (ClientConfigValues.doTemperature)
+                    renderThermometer(player);
             }
         }
     }

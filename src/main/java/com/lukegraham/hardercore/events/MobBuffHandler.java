@@ -1,12 +1,10 @@
 package com.lukegraham.hardercore.events;
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.capability.harsh_environment.HarshEnvironmentCapProvider;
-import com.lukegraham.hardercore.capability.mob_buffs.MobBuffs;
+import com.lukegraham.hardercore.config.HarderCoreConfig;
 import com.lukegraham.hardercore.capability.mob_buffs.MobBuffsCapProvider;
 import com.lukegraham.hardercore.capability.mob_buffs.MobBuffsCapability;
 import com.lukegraham.hardercore.world_data.HarderCoreData;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
@@ -14,29 +12,19 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.stats.Stats;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
 import net.minecraft.util.IndirectEntityDamageSource;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Objects;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -46,7 +34,7 @@ public class MobBuffHandler {
     @SubscribeEvent
     public static void buffMobs(LivingSpawnEvent.SpecialSpawn event){
         LivingEntity mob = event.getEntityLiving();
-        if (mob.getEntityWorld().isRemote() || !mob.isNonBoss()) return;
+        if (!HarderCoreConfig.doMobBuffs.get() || mob.getEntityWorld().isRemote() || !mob.isNonBoss()) return;
         String title = "";
         boolean canBePoison = mob instanceof SkeletonEntity || mob instanceof SpiderEntity;
         if (canBePoison && rand.nextInt(20) == 0){

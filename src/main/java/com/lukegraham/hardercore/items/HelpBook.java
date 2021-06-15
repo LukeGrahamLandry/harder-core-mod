@@ -67,6 +67,7 @@ public class HelpBook extends WritableBookItem {
         ListNBT pages = new ListNBT();
 
         addPage("This mod (Harder Core) makes many changes to make the game harder and the world less forgiving. The rest of this book lists the changes. If you're interested in the details, this mod is open source: github.com/LukeGrahamLandry/harder-core-mod", pages);
+        addPage("All features are configurable. Open a world once to generate the default config file then things disable as you see fit. File is at saves/your_world_name/serverconfig/hardercore-server.toml", pages);
         addPage("Being hungry causes slowness and weakness. Not sleeping causes slowness, reduced attack speed and eventually some nausea. Eating raw meat gives nausea and either poison or hunger.", pages);
         addPage("Being in darkness quickly spawns killer shadows which disappear in light. They drop scales which can craft a charm that stops their spawning while in your inventory or a questionable stew.", pages);
         addPage("Your temperature (displayed in top left) effected by biome, armor, being on fire and nearby blocks. Extremes give you hypothermia (slow move/attack) or heat stroke (nausea) both cause weakness and deal damage. You can craft charms that grant temperature immunity.", pages);

@@ -1,16 +1,15 @@
 package com.lukegraham.hardercore.events;
 
 import com.lukegraham.hardercore.HarderCore;
-import com.lukegraham.hardercore.entities.WonderingSpiritEntity;
-import com.lukegraham.hardercore.init.EntityInit;
+import com.lukegraham.hardercore.config.HarderCoreConfig;
 import com.lukegraham.hardercore.util.Helper;
 import com.lukegraham.hardercore.world_data.HarderCoreData;
-import net.minecraft.entity.*;
-import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
@@ -18,9 +17,7 @@ import net.minecraft.world.IServerWorld;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.player.SleepingTimeCheckEvent;
-import net.minecraftforge.event.world.SleepFinishedTimeEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,8 +31,12 @@ public class BloodMoonHandler {
     private static ArrayList<LivingEntity> spawnedMobs = new ArrayList<>();
 
     public static boolean isBloodMoon(World world){
+        int interval = HarderCoreConfig.bloodmoonInterval.get();
+        if (interval == 0) return true;
+        if (interval < 0) return false;
+
         int sleeps = HarderCoreData.getInstance(world).getSleeps();
-        return (sleeps + 1) % 8 == 0;
+        return (sleeps + 1) % interval == 0;
     }
 
     public static void spawnMonsters(PlayerEntity player) {
